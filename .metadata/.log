@@ -5451,3 +5451,15 @@ Caused by: org.eclipse.jgit.errors.TransportException: https://github.com/lucdat
 	at org.eclipse.jgit.transport.TransportHttp.openFetch(TransportHttp.java:465)
 	at org.eclipse.jgit.api.LsRemoteCommand.execute(LsRemoteCommand.java:167)
 	... 4 more
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-19 19:47:26.337
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.EcRXJqlU
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-19 19:47:26.339
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.EcRXJqlU
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-19 19:47:26.341
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-19 19:47:26.342
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.EcRXJqlU => OK
