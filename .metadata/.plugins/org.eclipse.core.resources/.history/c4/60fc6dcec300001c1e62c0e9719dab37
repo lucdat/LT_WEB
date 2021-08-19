@@ -1,0 +1,11 @@
+package test;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class Test {
+	public String index() {
+		return "index";
+	}
+
+}

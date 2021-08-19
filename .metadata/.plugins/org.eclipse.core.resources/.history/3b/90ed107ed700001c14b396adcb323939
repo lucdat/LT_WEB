@@ -1,0 +1,16 @@
+package shopshoes.entities;
+
+import java.io.Serializable;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class Myfile implements Serializable {
+	private static final long serialVersionUID = 4621940440984499718L;
+	private MultipartFile multipartFile;
+	private String description;
+	public Myfile() {
+		
+	}
+	
+	
+}
