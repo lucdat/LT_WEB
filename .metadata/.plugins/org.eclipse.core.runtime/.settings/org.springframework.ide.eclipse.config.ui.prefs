@@ -1,3 +1,4 @@
+//com.springsource.config.ui.prefs.activePageIndex\:/shoes_store/src/main/webapp/WEB-INF/config/web-mvc-servlet.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
 //com.springsource.config.ui.prefs.activePageIndex\:/shop_shoes/src/main/webapp/WEB-INF/config/web-mvc-servlet.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
 //com.springsource.config.ui.prefs.activePageIndex\:/test-maven/src/main/webapp/WEB-INF/config/web-mvc-servlet.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
 //com.springsource.config.ui.prefs.activePageIndex\:/test-maven/src/main/webapp/WEB-INF/spring-mvc-servlet.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>

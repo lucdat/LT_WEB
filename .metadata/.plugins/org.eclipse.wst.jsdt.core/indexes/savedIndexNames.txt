@@ -1,8 +1,2 @@
 INDEX VERSION 1.4+C:\Users\lucda\OneDrive\Documents\Project\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-2990288542.index
-2215528200.index
-695225788.index
-260305739.index
-556829031.index
-511159469.index
-1467450030.index
+3853033152.index

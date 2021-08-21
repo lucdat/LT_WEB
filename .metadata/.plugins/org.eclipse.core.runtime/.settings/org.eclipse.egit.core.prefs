@@ -1,5 +1,5 @@
-GitRepositoriesView.GitDirectories=
-GitRepositoriesView.GitDirectories.relative=
+GitRepositoriesView.GitDirectories=C\:\\Users\\lucda\\OneDrive\\Documents\\Project\\.git;
+GitRepositoriesView.GitDirectories.relative=.git;
 RepositorySearchDialogDeepSearch=true
 RepositorySearchDialogSearchPath=C\:\\Program Files\\Git
 core_autoIgnoreDerivedResources=false
