@@ -7,6 +7,8 @@ C:\Users\lucda\OneDrive\Documents\Project\.metadata\.plugins\org.eclipse.jst.jsp
 \shop_shoes\src\main\java
 C:\Users\lucda\OneDrive\Documents\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1021366618.index
 \shop_shoes\src\main\java
+C:\Users\lucda\OneDrive\Documents\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4190853314.index
+\shoes_store\src\main\java
 C:\Users\lucda\OneDrive\Documents\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2373334923.index
 \test-maven\src\main\java
 C:\Users\lucda\OneDrive\Documents\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3511539288.index

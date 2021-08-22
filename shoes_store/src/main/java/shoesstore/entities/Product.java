@@ -3,6 +3,7 @@ package shoesstore.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Product {
@@ -29,32 +33,36 @@ public class Product {
 	@Column(nullable = false)
 	private int quantity;
 	@Lob
-	private byte[] image;
+	@Column(columnDefinition = "MEDIUMBLOB")
+	private String image;
 	@Column(nullable = false,length = 100)
 	private String description;
 	@Column(nullable = false)
 	private int activeFlag;
 	
-	@ManyToOne
-	@JoinColumn(name = "cate_id",insertable = false,updatable = false)
+	@Transient
+	private MultipartFile file;
+	
+	@ManyToOne()
+	@JoinColumn(name = "cate_id")
 	private Category category;
 	
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<Invoice> invoices = new  HashSet<Invoice>();
 	
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
 	
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<FeedBack> feedBacks = new HashSet<FeedBack>();
 	
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(String code, String name, float sale, Double price, int quantity, byte[] image, String description,
-			int activeFlag, Category category, Set<Invoice> invoices, Set<OrderDetails> orderDetails,
-			Set<FeedBack> feedBacks) {
+	public Product(String code, String name, float sale, Double price, int quantity, String image,
+			String description, int activeFlag, MultipartFile file, Category category, Set<Invoice> invoices,
+			Set<OrderDetails> orderDetails, Set<FeedBack> feedBacks) {
 		this.code = code;
 		this.name = name;
 		this.sale = sale;
@@ -63,11 +71,14 @@ public class Product {
 		this.image = image;
 		this.description = description;
 		this.activeFlag = activeFlag;
+		this.file = file;
 		this.category = category;
 		this.invoices = invoices;
 		this.orderDetails = orderDetails;
 		this.feedBacks = feedBacks;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -117,12 +128,21 @@ public class Product {
 		this.quantity = quantity;
 	}
 
-	public byte[] getImage() {
+	
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
 	}
 
 	public String getDescription() {
@@ -171,6 +191,5 @@ public class Product {
 
 	public void setFeedBacks(Set<FeedBack> feedBacks) {
 		this.feedBacks = feedBacks;
-	}
-	
+	}	
 }

@@ -24,11 +24,11 @@ public class FeedBack {
 	private String content;
 	
 	@ManyToOne
-	@JoinColumn(name = "product_id",insertable = false,updatable = false)
+	@JoinColumn(name = "product_id")
 	private Product product;
 	
 	@ManyToOne
-	@JoinColumn(name = "account_id",insertable = false,updatable = false)
+	@JoinColumn(name = "account_id")
 	private Account account;
 	public FeedBack() {
 		// TODO Auto-generated constructor stub

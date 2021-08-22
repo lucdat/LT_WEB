@@ -3,6 +3,7 @@ package shoesstore.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,17 +21,17 @@ public class Category {
 	@Column(nullable = false)
 	private int activeFlag;
 	
-	@OneToMany(mappedBy = "category")
-	private Set<Product> product = new HashSet<Product>();
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+	private Set<Product> products = new HashSet<Product>();
 	
 	public Category() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Category(String name, int activeFlag, Set<Product> product) {
+	public Category(String name, int activeFlag, Set<Product> products) {
 		this.name = name;
 		this.activeFlag = activeFlag;
-		this.product = product;
+		this.products = products;
 	}
 
 	public Integer getId() {
@@ -57,12 +58,12 @@ public class Category {
 		this.activeFlag = activeFlag;
 	}
 
-	public Set<Product> getProduct() {
-		return product;
+	public Set<Product> getProducts() {
+		return products;
 	}
 
-	public void setProduct(Set<Product> product) {
-		this.product = product;
+	public void setProduct(Set<Product> products) {
+		this.products = products;
 	}
 	
 }

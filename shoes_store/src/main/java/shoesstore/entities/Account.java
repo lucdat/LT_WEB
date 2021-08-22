@@ -3,6 +3,7 @@ package shoesstore.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class Account {
 	@JoinColumn(name = "customer_id",referencedColumnName = "id")
 	private Customer customer;
 	
-	@OneToMany(mappedBy = "account")
+	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
 	private Set<FeedBack> feedBacks = new HashSet<FeedBack>();
 	
 	public Account() {

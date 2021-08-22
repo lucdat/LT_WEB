@@ -3,6 +3,7 @@ package shoesstore.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class Customer {
 	@Column(nullable = false,length = 100)
 	private String address;
 	
-	@OneToMany(mappedBy = "customer")
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private Set<Orders> customers = new HashSet<Orders>();
 	public Customer() {
 		// TODO Auto-generated constructor stub

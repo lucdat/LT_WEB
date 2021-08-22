@@ -24,14 +24,14 @@ public class Paging {
 
 
 	public int getTotalPages() {
+		if(totalRows>0) {
+			totalPages =(int) Math.ceil(totalRows/(double)recordPerPage);
+		}
 		return totalPages;
 	}
 
 
 	public void setTotalPages(int totalPages) {
-		if(this.totalRows>0) {
-			totalPages = (int)Math.ceil(this.totalRows/(double)this.recordPerPage);
-		}
 		this.totalPages = totalPages;
 	}
 
@@ -57,14 +57,23 @@ public class Paging {
 
 
 	public int getOffset() {
+		if(indexPage>0) {
+			offset = indexPage*recordPerPage - recordPerPage;
+		}
 		return offset;
 	}
 
 
 	public void setOffset(int offset) {
-		if(this.indexPage>0) {
-			offset = this.indexPage*this.recordPerPage - this.recordPerPage;
-		}
 		this.offset = offset;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Paging [totalRows=" + totalRows + ", totalPages=" + totalPages + ", recordPerPage=" + recordPerPage
+				+ ", indexPage=" + indexPage + ", offset=" + offset + "]";
+	}
+	
+	
 }

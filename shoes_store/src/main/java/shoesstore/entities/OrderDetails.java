@@ -17,10 +17,10 @@ public class OrderDetails {
 	private int quantity; 
 	
 	@ManyToOne
-	@JoinColumn(name = "product_id",insertable = false,updatable = false)
+	@JoinColumn(name = "product_id")
 	private Product product;
 	@ManyToOne
-	@JoinColumn(name = "order_id",insertable = false,updatable = false)
+	@JoinColumn(name = "order_id")
 	private Orders order;
 	
 	public OrderDetails() {

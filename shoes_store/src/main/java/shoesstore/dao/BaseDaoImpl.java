@@ -43,6 +43,7 @@ public class BaseDaoImpl<E,ID> implements BaseDao<E, ID> {
 			result.setMaxResults(paging.getRecordPerPage());
 			long totalRecords = (long)count.uniqueResult();
 			paging.setTotalRows(totalRecords);
+			log.info(totalRecords+"");
 		}
 		return result.list();
 	}
