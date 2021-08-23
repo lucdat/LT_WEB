@@ -26,19 +26,21 @@ public class Orders {
 	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
 	
 	@ManyToOne
-	@JoinColumn(name = "customer_id",insertable = false,updatable = false)
-	private Customer customer;
+	@JoinColumn(name = "user_id",nullable = true,insertable = false,updatable = false)
+	private User user;
 	
 	public Orders() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Orders(Double sumPrice, int status, Set<OrderDetails> orderDetails, Customer customer) {
+	public Orders(Double sumPrice, int status, Set<OrderDetails> orderDetails, User user) {
 		this.sumPrice = sumPrice;
 		this.status = status;
 		this.orderDetails = orderDetails;
-		this.customer = customer;
+		this.user = user;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -71,13 +73,11 @@ public class Orders {
 	public void setOrderDetails(Set<OrderDetails> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
-
-	public Customer getCustomer() {
-		return customer;
+	public User getUser() {
+		return user;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-	
+	public void setUser(User user) {
+		this.user = user;
+	}	
 }

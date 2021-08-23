@@ -9,7 +9,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	<mvc:annotation-driven />
-	<context:component-scan base-package="shoesstore" />
+	<context:component-scan
+		base-package="shoesstore" />
 	<mvc:resources location="/static/"
 		mapping="/resources/**" cache-period="31556926" />
 	<bean
@@ -64,4 +65,8 @@
 		<property name="maxUploadSize" value="268435456" />
 	</bean>
 	<mvc:default-servlet-handler />
+	<bean id="messageSource"
+        class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="/message/message" />
+    </bean>
 </beans>

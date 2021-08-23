@@ -1,13 +1,11 @@
 package shoesstore.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +26,6 @@ import shoesstore.entities.Product;
 @Controller
 @RequestMapping("product")
 public class ProductController {
-	private final static Logger log = Logger.getLogger(ProductController.class);
 	@Autowired
 	private ProductDao<Product, Integer> productDao;
 	@Autowired

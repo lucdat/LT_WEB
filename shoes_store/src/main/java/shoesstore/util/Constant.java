@@ -1,5 +1,11 @@
 package shoesstore.util;
 
+import java.util.List;
+
+import shoesstore.entities.Action;
+
 public class Constant {
-	public final static String DIRECT_FILE_IMG ="C:\\Users\\lucda\\OneDrive\\Documents\\Project\\shop_shoes\\src\\main\\webapp\\static\\image" ;
+	public final static String  USER_INFO = "userInfo";
+	public final static String  CUSTOMER_INFO = "customerInfo";
+	public final static String  MENU_LIST = "menu";
 }

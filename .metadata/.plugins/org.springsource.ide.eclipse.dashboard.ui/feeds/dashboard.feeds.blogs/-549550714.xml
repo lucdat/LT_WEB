@@ -5,7 +5,86 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2021-08-19T18:00:39Z</updated>
+  <updated>2021-08-23T05:02:00Z</updated>
+  <entry>
+    <title>Structuring Spring Boot Applications</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/08/22/structuring-spring-boot-applications" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2021-08-22:4525</id>
+    <updated>2021-08-23T05:02:00Z</updated>
+    <content type="html">&lt;h2&gt;&lt;a href="#or-how-to-build-a-mental-framework-for-spring-framework" class="anchor" name="or-how-to-build-a-mental-framework-for-spring-framework"&gt;&lt;/a&gt;or: How To Build a Mental Framework for Spring Framework&lt;/h2&gt;
+&lt;p&gt;It&amp;rsquo;s hard to think about structuring applications. There&amp;rsquo;s a lot to think about at the higher level - is it a batch job, a web application, a messaging application, etc. The frameworks - Spring Batch, Spring Webflux, Spring Integration, respectively - will guide those decisions. There are many other frameworks besides, and they are tailored made to help you build something worthy of production for a particular business vertical. We won&amp;rsquo;t explore those in this post. Instead, I want to answer the question: &lt;em&gt;how do we structure our configuration&lt;/em&gt;? &lt;/p&gt;
+&lt;p&gt;I can&amp;rsquo;t give you an opinionated answer and hope to fit it in one post, but we can discuss the technical dimensions of configuration in a Spring Boot application in 2021. It is easier to talk about how to structure your Java objects to work well in an inversion of control (IoC) container. Remember, at the end of the day, Spring is a big bag of objects. It needs to know how you want to arrange your objects - how they wire up and how they relate to each other - to provide services to them. For example, it can begin and commit transactions when a method starts and stops. It can create HTTP endpoints that invoke your Spring controller handler methods when a request arrives. It can invoke your message listener objects in response to new messages coming from an Apache Kafka broker or AWS SQS or RabbitMQ or whatever. The list of things Spring can do goes on and on, but it all assumes that you&amp;rsquo;ve registered the objects with Spring, first. &lt;/p&gt;
+&lt;p&gt;Spring has a metamodel of your objects - it&amp;rsquo;s sort of like the Java reflection API. It knows which classes have annotations. It knows which objects have constructors. It knows on which dependencies, which beans and which type, a given object depends. Your job is to help it build up this metamodel to manage all your objects for you. For example, if it can control the creation of your objects, then it can also change the creation of your objects before they get created. &lt;/p&gt;
+&lt;p&gt;Spring can only provide all those services for you if it knows how the objects are wired together. So the idea is that you give Spring plain &amp;rsquo;ol Java objects (POJOs), and it&amp;rsquo;ll detect annotations on them and use those annotations to wire up the behavior for your services. But, of course, it can&amp;rsquo;t do that unless it controls the creation of your Java objects. &lt;/p&gt;
+&lt;p&gt;Behind the scenes, it does this by either creating a Java InvocationHandler (a JDK proxy) &lt;em&gt;or&lt;/em&gt;, more commonly, by using something like CGLIB to make a new class that extends your Java class. This class is a subclass of your class. So, imagine you have a class like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;&lt;br/&gt;class CustomerService  {&#xD;
+&#xD;
+	private final JdbcTemplate template; &#xD;
+&#xD;
+	CustomerService (JdbcTemplate jt) {&#xD;
+		this.JdbcTemplate = jt;&#xD;
+	}&#xD;
+&#xD;
+    @Transactional &#xD;
+	public void updateCustomer ( long customerId, String name){&#xD;
+       // .. .&#xD;
+	}&#xD;
+}&#xD;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You want Spring to automatically start and stop a transaction each time that method is invoked. For this to work, Spring needs to insert itself before and after your method is called. Behind the scenes, it does something like this: &lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;class SpringEnhancedCustomerService extends CustomerService {&#xD;
+&#xD;
+    // Spring provides a reference from the applicationContext of type JdbcTemplate&#xD;
+	SpringEnhancedCustomerService (JdbcTemplate jt) {&#xD;
+		 super(JdbcTemplate ) ;&#xD;
+	}&#xD;
+&#xD;
+&#xD;
+	@Override &#xD;
+	public void updateCustomer (long customerId, String name) {&#xD;
+		// call Java code to start a JDBC transaction &#xD;
+		super.updateCustomer(customerId, name);&#xD;
+		// call Java code to stop a JDBC transaction&#xD;
+	}&#xD;
+}&#xD;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In your code, you can then inject a reference to &lt;code&gt;CustomerService&lt;/code&gt;. You&amp;rsquo;ll still get one, but not the one you created. Instead, you&amp;rsquo;ll get the subclass. It&amp;rsquo;s this magic trick - of you asking for a hat and getting a hat with a rabbit in it instead - that makes Spring so powerful. &lt;/p&gt;
+&lt;p&gt;So, Spring must know about your objects. There are many ways to do this. &lt;/p&gt;
+&lt;p&gt;One is you can be very explicit. Before Spring Boot, you had two standard options: XML and Java configuration. That was 2013 and earlier, however. Nowadays, we don&amp;rsquo;t encourage the use of XML, so you&amp;rsquo;re left with Java configuration. Here&amp;rsquo;s an example: &lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@Configuration &#xD;
+class ServiceConfiguration {&#xD;
+&#xD;
+ @Bean DataSource h2DataSource (){&#xD;
+ 	return ... ;&#xD;
+ }&#xD;
+&#xD;
+ @Bean JdbcTemplate JdbcTemplate (DataSource ds) {&#xD;
+ 	return new JdbcTemplate(ds);&#xD;
+ }&#xD;
+&#xD;
+  @Bean CustomerService customerService (JdbcTemplate jdbcTemplate) {&#xD;
+  	return new CustomerService (jdbcTemplate);&#xD;
+  }&#xD;
+}&#xD;
+&#xD;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here, you&amp;rsquo;re creating three objects and explicitly wiring things together. When Spring starts up, it finds the &lt;code&gt;@Configuration&lt;/code&gt; classes, invokes all the methods annotated with &lt;code&gt;@Bean&lt;/code&gt;, stores all the return values in the application context, and makes them available for injection. If it seems that the method takes parameters, it looks to find any other method that returns a value of that type and invokes it first. This value is then &lt;em&gt;injected&lt;/em&gt; into the method as a parameter. If it&amp;rsquo;s already invoked the method for some other injection, it just reuses the already created instance. &lt;/p&gt;
+&lt;p&gt;This approach benefits from being explicit - all the information about how your objects are wired up is in one place - the configuration classes. But, for classes you created, you have knowledge in two different locations: the class itself and the configuration class. &lt;/p&gt;
+&lt;p&gt;So, there&amp;rsquo;s another, more implicit approach you can use: component-scanning. In this approach, Spring looks for classes on the classpath that have &lt;em&gt;stereotype&lt;/em&gt; annotations, like &lt;code&gt;@Component&lt;/code&gt; or &lt;code&gt;@Controller&lt;/code&gt;. All stereotype annotations are ultimately annotated with &lt;code&gt;@Component&lt;/code&gt;. &lt;code&gt;@Component&lt;/code&gt; is the lowest, most undifferentiated annotation. If you look at &lt;code&gt;@Controller&lt;/code&gt;, it is annotated with &lt;code&gt;@Component&lt;/code&gt;. If you look at &lt;code&gt;@RestController&lt;/code&gt;, it is annotated with &lt;code&gt;@Controller&lt;/code&gt;. There are three bits of indirection, but the class annotated with &lt;code&gt;@RestController&lt;/code&gt; is still treated, at a minimum, like a class annotated with &lt;code&gt;@Component&lt;/code&gt;. The specialized annotations add on specialized treatment, but they&amp;rsquo;re still specializations of &lt;code&gt;@Component&lt;/code&gt;, not alternatives to it. &lt;/p&gt;
+&lt;p&gt;So, we might decide that it&amp;rsquo;s annoying to define &lt;code&gt;CustomerService&lt;/code&gt; and configure it in the configuration class. After all, if Spring only knew about the class, it could figure out the rest of the relationships by itself, surely? It could look at the constructor and see that, to construct an instance of &lt;code&gt;CustomerService&lt;/code&gt;, it would need a reference to &lt;code&gt;JdbcTemplate&lt;/code&gt;, which has already been defined elsewhere.&lt;/p&gt;
+&lt;p&gt;So, that&amp;rsquo;s what component scanning does. You can add &lt;code&gt;@Service&lt;/code&gt;, another stereotype annotation that&amp;rsquo;s annotated with &lt;code&gt;@Component&lt;/code&gt;, to the class and then remove the &lt;code&gt;@Bean&lt;/code&gt; method in the configuration class. Spring will automatically create the service, it&amp;rsquo;ll provide the required dependencies. It&amp;rsquo;ll also subclass the class to provide those services.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;re making progress, removing ever more boilerplate. But what about the &lt;code&gt;DataSource&lt;/code&gt; and the &lt;code&gt;JdbcTemplate&lt;/code&gt;? You need them, but surely you shouldn&amp;rsquo;t have to recreate them each time? This is the insight of Spring Boot. It uses &lt;code&gt;@Condition&lt;/code&gt; annotations to decorate classes annotated with &lt;code&gt;@Component&lt;/code&gt; or &lt;code&gt;@Configuration&lt;/code&gt; to evaluate a test before creating the class or invoking the &lt;code&gt;@Bean&lt;/code&gt; method. These tests can look for clues in the environment. For example, let&amp;rsquo;s suppose you have H2 - an embedded SQL database on the classpath. And you have the &lt;code&gt;spring-jdbc&lt;/code&gt; library on the classpath that contains the &lt;code&gt;JdbcTemplate&lt;/code&gt; class. It can use a test to test for the presence of those classes on the classpath and infer that you want an embedded SQL &lt;code&gt;DataSource&lt;/code&gt; and that you want a &lt;code&gt;JdbcTemplate&lt;/code&gt; instance wired up with the newly-minted &lt;code&gt;DataSource&lt;/code&gt;. It has its own configuration to provide those beans for you. Now, you can drop the &lt;code&gt;@Configuration&lt;/code&gt; class altogether! Spring Boot provided two of the beans and implied the other one based on the stereotype annotations. &lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ve looked at the basic motivations for the Spring IoC container, and we&amp;rsquo;ve looked at how the IoC container works to help satisfy the promises that the framework puts forward. &lt;/p&gt;
+&lt;p&gt;We could indeed go a lot further, exploring aspect oriented programming (AOP), auto-configuration, and so much more, but this was meant to provide a mental framework for understanding when to apply which kind of configuration so that you can focus on the important work of getting working software to production safely and quickly. &lt;/p&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Spring Boot 2.6.0-M2 is now available</title>
     <link rel="alternate" href="https://spring.io/blog/2021/08/19/spring-boot-2-6-0-m2-is-now-available" />
@@ -616,29 +695,6 @@ compile &amp;#39;org.springframework.cloud:spring-cloud-starter-netflix-eureka-c
     <content type="html">&lt;p&gt;Hi, Spring fans! In this July 2021 installment of SpringOne Tour, Josh Long, Cora Iberkleid, Angie Jones, Madhura Bhave, Bella Bai, Olga Maciaszek-Sharma, Whitney Lee, and Nate Schutta look at the wide and wonderful world of testing, continuous integration, and continuous delivery. &lt;/p&gt;
 &lt;p&gt;This event - a mini-conference if you will - is two hours and some change long and features dedicated segments from the industry&amp;rsquo;s best, so grab a drink, a note pad, and let&amp;rsquo;s get to it! &lt;/p&gt;
 &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/pQwMws6we6I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Boot 2.6.0-M1 is now available</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/07/22/spring-boot-2-6-0-m1-is-now-available" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Phil Webb</name>
-    </author>
-    <id>tag:spring.io,2021-07-23:4505</id>
-    <updated>2021-07-23T01:00:00Z</updated>
-    <content type="html">&lt;p&gt;On behalf of the team and everyone who has contributed, I&amp;rsquo;m happy to announce that Spring Boot &lt;code&gt;2.6.0-M1&lt;/code&gt; has been released and is now available from &lt;a href="https://repo.spring.io/milestone"&gt;https://repo.spring.io/milestone&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This release includes &lt;a href="https://github.com/spring-projects/spring-boot/releases/tag/v2.6.0-M1"&gt;120 bug fixes, documentation improvements, and dependency upgrades&lt;/a&gt;. Notable new features include:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Auto-configuration for Spring Data Envers&lt;/li&gt;
-  &lt;li&gt;More metrics support (including task execution and scheduling export and support for the Dynatrace v2 API)&lt;/li&gt;
-  &lt;li&gt;Auto-configured Spring Web Service Server Tests&lt;/li&gt;
-  &lt;li&gt;Improved Configuration of the Maven Plugin’s Start Goal&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Please see the &lt;a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.6.0.M1-Release-Notes"&gt;release notes&lt;/a&gt; for more details and upgrade instructions.&lt;/p&gt;
-&lt;p&gt;Thanks to all those who have contributed with issue reports and pull requests. Our next set of releases are due August 19, 2021.&lt;/p&gt;&lt;h3&gt;&lt;a href="#how-can-you-help" class="anchor" name="how-can-you-help"&gt;&lt;/a&gt;How can you help?&lt;/h3&gt;
-&lt;p&gt;If you&amp;rsquo;re interested in helping out, check out the &lt;a href="https://github.com/spring-projects/spring-boot/labels/status%3A%20ideal-for-contribution"&gt;&amp;ldquo;ideal for contribution&amp;rdquo; tag&lt;/a&gt; in the issue repository. If you have general questions, please ask on &lt;a href="https://stackoverflow.com"&gt;stackoverflow.com&lt;/a&gt; using the &lt;a href="https://stackoverflow.com/tags/spring-boot"&gt;&lt;code&gt;spring-boot&lt;/code&gt; tag&lt;/a&gt; or chat with the community on &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://spring.io/projects/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-boot/docs/2.6.0-M1/reference/html"&gt;Documentation&lt;/a&gt; | &lt;a href="https://stackoverflow.com/questions/tagged/spring-boot"&gt;Stack Overflow&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;&lt;/p&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>

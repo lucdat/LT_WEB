@@ -1,5 +1,8 @@
 package shoesstore.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class User {
@@ -21,23 +28,51 @@ public class User {
 	@Column(nullable = false,length = 100)
 	private String password;
 	@Lob
-	private byte[] image;
+	@Column(columnDefinition = "MEDIUMBLOB")
+	private String image;
+	@Column(nullable = false,length = 100)
+	private String address;
 	@Column(nullable = false)
 	private int activeFlag;
 	
+	@Transient
+	private MultipartFile file;
+	
 	@ManyToOne
-	@JoinColumn(name = "role_id",referencedColumnName = "id")
+	@JoinColumn(name = "role_id",referencedColumnName = "id",nullable = true)
 	private Role role;
+	
+	@OneToMany(mappedBy = "user")
+	private Set<FeedBack> feedBacks = new HashSet<FeedBack>();
+	@OneToMany(mappedBy = "user")
+	private Set<Orders> orders = new HashSet<Orders>();
+	
 	
 	public User() {
 	}
-	public User(String name, String email, String password, byte[] image, int activeFlag, Role role) {
+	
+	public User(String name, String email, String password, String image, int activeFlag, MultipartFile file,
+			Role role) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.image = image;
 		this.activeFlag = activeFlag;
+		this.file = file;
 		this.role = role;
+	}
+	
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public Integer getId() {
@@ -72,12 +107,10 @@ public class User {
 		this.password = password;
 	}
 
-	public byte[] getImage() {
-		return image;
-	}
+	
 
-	public void setImage(byte[] image) {
-		this.image = image;
+	public String getImage() {
+		return image;
 	}
 
 	public int getActiveFlag() {

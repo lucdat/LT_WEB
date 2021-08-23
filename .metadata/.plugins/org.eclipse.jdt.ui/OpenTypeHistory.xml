@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<typeInfoHistroy/>
+<typeInfoHistroy>
+    <typeInfo handle="=shoes_store/C:\/Users\/lucda\/.m2\/repository\/org\/springframework\/spring-context\/5.2.8.RELEASE\/spring-context-5.2.8.RELEASE.jar=/maven.pomderived=/true=/=/org.eclipse.jst.component.dependency=/\/WEB-INF\/lib=/=/maven.pomderived=/true=/=/org.eclipse.jst.component.archivename=/spring-context-5.2.8.RELEASE.jar=/=/maven.groupId=/org.springframework=/=/maven.artifactId=/spring-context=/=/maven.version=/5.2.8.RELEASE=/=/maven.scope=/compile=/&lt;org.springframework.context.support(ReloadableResourceBundleMessageSource.class[ReloadableResourceBundleMessageSource" modifiers="33" timestamp="1629298691638"/>
+</typeInfoHistroy>

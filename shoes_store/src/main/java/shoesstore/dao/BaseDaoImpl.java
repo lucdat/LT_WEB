@@ -55,26 +55,14 @@ public class BaseDaoImpl<E,ID> implements BaseDao<E, ID> {
 	}
 
 	@Override
-	public List<E> findByProperty(String property, Object value, Paging paging) {
+	public List<E> findByProperty(String property, Object value) {
 		log.info("find by property "+property+" "+value.toString());
 		StringBuilder query = new StringBuilder("");
-		StringBuilder countQuery = new StringBuilder("");
-	
 		query.append("from ").append(getGenericName())
-			 .append(" as model where model.activeFlag=1 and model.").append(property).append(" like:value");
-		countQuery.append("select count(*) form ").append(getGenericName())
-		     .append(" as model where model.activeFlag=1 and model.").append(property).append(" like:value");
+			 .append(" as model where model.activeFlag=1 and model.").append(property).append("=?");
 		Query<E> result = sessionFactory.getCurrentSession()
-										.createQuery(query.toString()).setParameter("value", "%"+value+"%");
-		Query<E> count = sessionFactory.getCurrentSession()
-										.createQuery(countQuery.toString()).setParameter("value", "%"+value+"%");
+										.createQuery(query.toString()).setParameter(0, value);
 		log.info(query);
-		if(paging!=null) {
-			result.setFirstResult(paging.getOffset());
-			result.setMaxResults(paging.getRecordPerPage());
-			long totalRecords = (long)count.uniqueResult();
-			paging.setTotalRows(totalRecords);
-		}
 		return result.list();
 	}
 

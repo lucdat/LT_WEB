@@ -24,21 +24,23 @@ public class FeedBack {
 	private String content;
 	
 	@ManyToOne
-	@JoinColumn(name = "product_id")
+	@JoinColumn(name = "product_id",referencedColumnName = "id",nullable = true)
 	private Product product;
 	
 	@ManyToOne
-	@JoinColumn(name = "account_id")
-	private Account account;
+	@JoinColumn(name = "user_id",referencedColumnName = "id",nullable = true)
+	private User user;
 	public FeedBack() {
 		// TODO Auto-generated constructor stub
 	}
-	public FeedBack(Date date, String content, Product product, Account account) {
+	
+	public FeedBack(Date date, String content, Product product, User user) {
 		this.date = date;
 		this.content = content;
 		this.product = product;
-		this.account = account;
+		this.user = user;
 	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -63,11 +65,13 @@ public class FeedBack {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	public Account getAccount() {
-		return account;
+
+	public User getUser() {
+		return user;
 	}
-	public void setAccount(Account account) {
-		this.account = account;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 }

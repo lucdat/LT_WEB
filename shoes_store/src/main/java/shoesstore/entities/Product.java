@@ -44,7 +44,7 @@ public class Product {
 	private MultipartFile file;
 	
 	@ManyToOne()
-	@JoinColumn(name = "cate_id")
+	@JoinColumn(name = "cate_id",referencedColumnName = "id",nullable = true)
 	private Category category;
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)

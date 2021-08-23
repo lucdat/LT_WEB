@@ -31,7 +31,7 @@ public class Invoice {
 	@Column(nullable = false)
 	private int activeFlag;	
 	@ManyToOne
-	@JoinColumn(name = "product_id",referencedColumnName = "id")
+	@JoinColumn(name = "product_id",referencedColumnName = "id",nullable = true)
 	private Product product;
 	
 	public Invoice() {
