@@ -16,14 +16,7 @@
 
 		<form:form action="add" method="post" modelAttribute="product"  enctype="multipart/form-data">
 			<table border="0" cellpadding="5">
-				<tr>
-					<td>Category:</td>
-					<td><select name="category.id">
-							<c:forEach items="${categories}" var="category">
-								<option value="${category.id}">${category.name}</option>
-							</c:forEach>
-					</select></td>
-				</tr>
+				
 				<tr>
 					<td>Code:</td>
 					<td><form:input path="code" /></td>

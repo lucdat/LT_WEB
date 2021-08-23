@@ -3,12 +3,6 @@
 <!-- [ dark-table ] start -->
 <div class="col-md-6">
 	<div class="card">
-		<div class="card-header">
-			<h5>Dark Table</h5>
-			<span class="d-block m-t-5">use class <code>table-dark</code>
-				inside table element
-			</span>
-		</div>
 		<div class="card-body table-border-style">
 			<div class="table-responsive">
 				<table class="table table-dark">

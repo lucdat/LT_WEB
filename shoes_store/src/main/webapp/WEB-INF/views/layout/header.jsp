@@ -3,8 +3,8 @@
 		<div class="m-header">
 			<a class="mobile-menu" id="mobile-collapse1" href="#!"><span></span></a>
 			<a href="index.html" class="b-brand">
-				<img src="<%=request.getContextPath() %>/resources/images/logo.svg"/>" alt="" class="logo images">
-				<img src="<%=request.getContextPath() %>/resources/images/logo-icon.svg"/>" alt="" class="logo-thumb images">
+				<img src="<%=request.getContextPath() %>/resources/images/logo.svg" alt="" class="logo images">
+				<img src="<%=request.getContextPath() %>/resources/images/logo-icon.svg" alt="" class="logo-thumb images">
 			</a>
 		</div>
 		<a class="mobile-menu" id="mobile-header" href="#!">
@@ -23,7 +23,7 @@
 						</a>
 						<div class="dropdown-menu dropdown-menu-right profile-notification">
 							<div class="pro-head">
-								<img src="<%=request.getContextPath() %>/resources/images/user/avatar-1.jpg"/>" class="img-radius" alt="User-Profile-Image">
+								<img src="<%=request.getContextPath() %>/resources/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
 								<span>John Doe</span>
 								<a href="auth-signin.html" class="dud-logout" title="Logout">
 									<i class="feather icon-log-out"></i>

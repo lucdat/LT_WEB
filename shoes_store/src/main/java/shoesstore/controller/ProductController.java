@@ -51,8 +51,6 @@ public class ProductController {
 	@GetMapping("add")
 	public String formProduct(Model model) {
 		model.addAttribute("product", new Product());
-		List<Category> categories = categoryDao.findAll(null);
-		model.addAttribute("categories", categories);
 		return "product/product-form";
 	}
 
@@ -67,12 +65,6 @@ public class ProductController {
 			product.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		if (product.getCategory().getId() != null) {
-			int categoryId = product.getCategory().getId();
-			Category category = categoryDao.findById(Category.class, categoryId);
-			category.getProducts().add(product);
-			product.setCategory(category);
 		}
 		product.setActiveFlag(1);
 		productDao.insert(product);
