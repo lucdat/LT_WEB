@@ -45,7 +45,7 @@ public class ProductController {
 		model.addAttribute("list", products);
 		model.addAttribute("paging", paging);
 		System.out.println(paging);
-		return "product/product-list";
+		return "product";
 	}
 
 	@GetMapping("add")
@@ -60,8 +60,7 @@ public class ProductController {
 	public String addNewProduct(@ModelAttribute("product") Product product) {
 		MultipartFile file = product.getFile();
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-		if(fileName.contains(".."))
-		{
+		if (fileName.contains("..")) {
 			System.out.println("not a a valid file");
 		}
 		try {
@@ -69,12 +68,13 @@ public class ProductController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		int categoryId = product.getCategory().getId();
-		Category category = categoryDao.findById(Category.class, categoryId);
+		if (product.getCategory().getId() != null) {
+			int categoryId = product.getCategory().getId();
+			Category category = categoryDao.findById(Category.class, categoryId);
+			category.getProducts().add(product);
+			product.setCategory(category);
+		}
 		product.setActiveFlag(1);
-		category.getProducts().add(product);
-		product.setCategory(category);
-		System.out.println(product);
 		productDao.insert(product);
 		return "redirect:list";
 	}

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,16 +25,16 @@
 <meta name="author" content="Codedthemes" />
 
 <!-- Favicon icon -->
-<link rel="icon" href="<c:url value="resources/images/favicon.ico"/>"
+<link rel="icon" href="<%=request.getContextPath() %>/resources/images/favicon.ico"
 	type="image/x-icon">
 <!-- fontawesome icon -->
 <link rel="stylesheet"
-	href="<c:url value="resources/fonts/fontawesome/css/fontawesome-all.min.css"/>">
+	href="<%=request.getContextPath() %>/resources/fonts/fontawesome/css/fontawesome-all.min.css">
 <!-- animation css -->
 <link rel="stylesheet"
-	href="<c:url value="resources/plugins/animation/css/animate.min.css"/>">
+	href="<%=request.getContextPath() %>/resources/plugins/animation/css/animate.min.css">
 <!-- vendor css -->
-<link rel="stylesheet" href="<c:url value="resources/css/style.css"/>">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/style.css">
 </head>
 
 <body class="">
@@ -73,11 +72,10 @@
 	</div>
 	<tiles:insertAttribute name="footer" />
 	<!-- Required Js -->
-	<script src="<c:url value="resources/js/vendor-all.min.js"/>"></script>
+	<script src="<%=request.getContextPath() %>/resources/js/vendor-all.min.js"></script>
 	<script
-		src="<c:url value="resources/plugins/bootstrap/js/bootstrap.min.js"/>"></script>
-	<script src="<c:url value="resources/js/pcoded.min.js"/>"></script>
-
+		src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath() %>/resources/js/pcoded.min.js"></script>
 </body>
 
 </html>

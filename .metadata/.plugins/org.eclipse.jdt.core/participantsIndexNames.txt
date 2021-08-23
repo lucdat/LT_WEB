@@ -23,3 +23,5 @@ C:\Users\lucda\OneDrive\Documents\Project\.metadata\.plugins\org.eclipse.jst.jsp
 \test-maven\src\main\java
 C:\Users\lucda\OneDrive\Documents\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4190772708.index
 \shoes_store\src\main\java
+C:\Users\lucda\OneDrive\Documents\Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3422318656.index
+\shoes_store\src\main\java

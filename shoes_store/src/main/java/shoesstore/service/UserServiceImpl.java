@@ -16,25 +16,21 @@ public class UserServiceImpl implements UserService<User, Integer> {
 	private UserDao<User, Integer> userDao;
 	@Override
 	public List<User> findAll(Paging paging) {
-		// TODO Auto-generated method stub
 		return userDao.findAll(paging);
 	}
 
 	@Override
 	public User findById(Class<User> e, Integer id) {
-		// TODO Auto-generated method stub
 		return userDao.findById(e, id);
 	}
 
 	@Override
 	public List<User> findByProperty(String property, Object value) {
-		// TODO Auto-generated method stub
 		return userDao.findByProperty(property, value);
 	}
 
 	@Override
 	public int insert(User instance) {
-		// TODO Auto-generated method stub
 		return userDao.insert(instance);
 	}
 
