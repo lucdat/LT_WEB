@@ -28,10 +28,9 @@ public class Category {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Category(String name, int activeFlag, Set<Product> products) {
+	public Category(String name, int activeFlag) {
 		this.name = name;
 		this.activeFlag = activeFlag;
-		this.products = products;
 	}
 
 	public Integer getId() {

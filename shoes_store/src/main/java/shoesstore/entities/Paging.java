@@ -3,7 +3,7 @@ package shoesstore.entities;
 public class Paging {
 	private Long totalRows;
 	private int totalPages;
-	private int recordPerPage=2;
+	private int recordPerPage=10;
 	private int indexPage;
 	private int offset;
 	

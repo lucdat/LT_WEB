@@ -3,6 +3,7 @@ package shoesstore.controller;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import shoesstore.dao.CategoryDao;
@@ -51,24 +54,33 @@ public class ProductController {
 	@GetMapping("add")
 	public String formProduct(Model model) {
 		model.addAttribute("product", new Product());
-		return "product/product-form";
+		return "product-form";
 	}
 
+//	@PostMapping("add")
+//	public String addNewProduct(@ModelAttribute("product") Product product) {
+//		MultipartFile file = product.getFile();
+//		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//		if (fileName.contains("..")) {
+//			System.out.println("not a a valid file");
+//		}
+//		try {
+//			product.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		product.setActiveFlag(1);
+//		productDao.insert(product);
+//		return "redirect:list";
+//	}
+
 	@PostMapping("add")
-	public String addNewProduct(@ModelAttribute("product") Product product) {
-		MultipartFile file = product.getFile();
+	@ResponseBody
+	public String addNewProduct(@RequestParam Map<String, Object> param,@RequestParam("image") MultipartFile file) {
+		System.out.println(param);
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-		if (fileName.contains("..")) {
-			System.out.println("not a a valid file");
-		}
-		try {
-			product.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		product.setActiveFlag(1);
-		productDao.insert(product);
-		return "redirect:list";
+		System.out.println(fileName);
+		return "ok" ;
 	}
 
 }

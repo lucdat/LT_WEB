@@ -35,6 +35,7 @@
 	href="<%=request.getContextPath() %>/resources/plugins/animation/css/animate.min.css">
 <!-- vendor css -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body class="">
