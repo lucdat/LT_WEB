@@ -25,13 +25,13 @@ public class User {
 	private String name;
 	@Column(unique = true,nullable = false,length = 100)
 	private String email;
+	@Column(nullable = false,length =10)
+	private String phone;
 	@Column(nullable = false,length = 100)
 	private String password;
 	@Lob
 	@Column(columnDefinition = "MEDIUMBLOB")
 	private String image;
-	@Column(nullable = false,length = 100)
-	private String address;
 	@Column(nullable = false)
 	private int activeFlag;
 	
@@ -51,18 +51,21 @@ public class User {
 	public User() {
 	}
 	
-	public User(String name, String email, String password, String image, int activeFlag, MultipartFile file,
-			Role role) {
+	public User(String name, String email, String phone, String password, String image, int activeFlag,
+			MultipartFile file, Role role, Set<FeedBack> feedBacks, Set<Orders> orders) {
+		super();
 		this.name = name;
 		this.email = email;
+		this.phone = phone;
 		this.password = password;
 		this.image = image;
 		this.activeFlag = activeFlag;
 		this.file = file;
 		this.role = role;
+		this.feedBacks = feedBacks;
+		this.orders = orders;
 	}
-	
-	
+
 	public MultipartFile getFile() {
 		return file;
 	}
@@ -127,6 +130,30 @@ public class User {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Set<FeedBack> getFeedBacks() {
+		return feedBacks;
+	}
+
+	public void setFeedBacks(Set<FeedBack> feedBacks) {
+		this.feedBacks = feedBacks;
+	}
+
+	public Set<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Orders> orders) {
+		this.orders = orders;
 	}
 	
 	

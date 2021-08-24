@@ -21,6 +21,8 @@ public class Orders {
 	private Double sumPrice;
 	@Column(nullable = false)
 	private int status;
+	@Column(nullable = false,length = 100)
+	private String address;
 	
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
@@ -33,14 +35,15 @@ public class Orders {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Orders(Double sumPrice, int status, Set<OrderDetails> orderDetails, User user) {
+
+	public Orders(Double sumPrice, int status, String address, Set<OrderDetails> orderDetails, User user) {
+		super();
 		this.sumPrice = sumPrice;
 		this.status = status;
+		this.address = address;
 		this.orderDetails = orderDetails;
 		this.user = user;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -79,5 +82,14 @@ public class Orders {
 
 	public void setUser(User user) {
 		this.user = user;
-	}	
+	}
+
+
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
 }

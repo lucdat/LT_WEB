@@ -48,7 +48,7 @@ public class Product {
 	private Category category;
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	private Set<Invoice> invoices = new  HashSet<Invoice>();
+	private Set<Import> imports = new  HashSet<Import>();
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
@@ -60,9 +60,10 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(String code, String name, float sale, Double price, int quantity, String image,
-			String description, int activeFlag, MultipartFile file, Category category, Set<Invoice> invoices,
-			Set<OrderDetails> orderDetails, Set<FeedBack> feedBacks) {
+	
+	public Product(String code, String name, float sale, Double price, int quantity, String image, String description,
+			int activeFlag, MultipartFile file, Category category, Set<Import> imports, Set<OrderDetails> orderDetails,
+			Set<FeedBack> feedBacks) {
 		this.code = code;
 		this.name = name;
 		this.sale = sale;
@@ -73,11 +74,10 @@ public class Product {
 		this.activeFlag = activeFlag;
 		this.file = file;
 		this.category = category;
-		this.invoices = invoices;
+		this.imports = imports;
 		this.orderDetails = orderDetails;
 		this.feedBacks = feedBacks;
 	}
-
 
 
 	public Integer getId() {
@@ -168,14 +168,16 @@ public class Product {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-
-	public Set<Invoice> getInvoices() {
-		return invoices;
+	
+	public Set<Import> getImports() {
+		return imports;
 	}
 
-	public void setInvoices(Set<Invoice> invoices) {
-		this.invoices = invoices;
+
+	public void setImports(Set<Import> imports) {
+		this.imports = imports;
 	}
+
 
 	public Set<OrderDetails> getOrderDetails() {
 		return orderDetails;
