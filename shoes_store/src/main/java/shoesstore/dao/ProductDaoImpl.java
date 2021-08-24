@@ -1,9 +1,7 @@
 package shoesstore.dao;
 
 import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Repository;
-
 import shoesstore.entities.Product;
 
 @Repository

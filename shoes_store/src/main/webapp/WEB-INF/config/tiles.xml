@@ -24,4 +24,7 @@
    <definition name="user-list" extends="layout">
     <put-attribute name="body" value="/WEB-INF/views/user/user-list.jsp" />
   </definition>
+    <definition name="product-list" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/product/product-list.jsp" />
+  </definition>
 </tiles-definitions>

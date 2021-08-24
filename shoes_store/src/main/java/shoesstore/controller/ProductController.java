@@ -2,11 +2,14 @@ package shoesstore.controller;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
 
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
+import org.apache.velocity.runtime.directive.Foreach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,9 +39,9 @@ public class ProductController {
 	@Autowired
 	ServletContext servletContext;
 
-	@GetMapping("list")
+	@GetMapping
 	public String ridirectFindAll() {
-		return "redirect:list/1";
+		return "redirect:product/list/1";
 	}
 
 	@GetMapping("list/{indexPage}")
@@ -48,39 +51,91 @@ public class ProductController {
 		model.addAttribute("list", products);
 		model.addAttribute("paging", paging);
 		System.out.println(paging);
-		return "product";
+		return "product-list";
 	}
 
 	@GetMapping("add")
 	public String formProduct(Model model) {
 		model.addAttribute("product", new Product());
+		List<Category> listCategories = categoryDao.findAll();
+		model.addAttribute("categories", listCategories);
+		model.addAttribute("url", "add");
 		return "product-form";
 	}
-
-//	@PostMapping("add")
-//	public String addNewProduct(@ModelAttribute("product") Product product) {
-//		MultipartFile file = product.getFile();
-//		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-//		if (fileName.contains("..")) {
-//			System.out.println("not a a valid file");
-//		}
-//		try {
-//			product.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		product.setActiveFlag(1);
-//		productDao.insert(product);
-//		return "redirect:list";
-//	}
-
+	
 	@PostMapping("add")
-	@ResponseBody
-	public String addNewProduct(@RequestParam Map<String, Object> param,@RequestParam("image") MultipartFile file) {
-		System.out.println(param);
-		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-		System.out.println(fileName);
-		return "ok" ;
+	public String addNewProduct(@ModelAttribute("product") Product product , Model model) {
+		try {
+			MultipartFile file = product.getFile();
+			String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+			if(fileName.contains(".."))
+			{
+				System.out.println("not a a valid file");
+			}
+			try {
+				product.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			int categoryId = product.getCategory().getId();
+			Category category = categoryDao.findById(Category.class, categoryId);
+			product.setActiveFlag(1);
+			category.getProducts().add(product);
+			product.setCategory(category);
+			System.out.println(product.getPrice());
+			productDao.insert(product);
+		} catch (Exception e) {
+			model.addAttribute("error" ,1);
+			return "product-form";
+		}
+		
+		return "redirect:list/1";
 	}
-
+	
+	@GetMapping("edit/{id}")
+	public String showFormEditCategory(@PathVariable("id") int id , Model model) {
+		model.addAttribute("product", new Product());
+		List<Category> listCategories = categoryDao.findAll();
+		model.addAttribute("categories", listCategories);
+		Product product = productDao.findById(Product.class, id);
+		model.addAttribute("product", product);
+		model.addAttribute("url", "../edit/"+product.getId());
+		return "product-form";
+	}
+	@PostMapping("edit/{id}")
+	public String editCategory(@ModelAttribute("product") Product product , Model model) {
+		try {
+			MultipartFile file = product.getFile();
+			String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+			if(fileName.contains(".."))
+			{
+				System.out.println("not a a valid file");
+			}
+			try {
+				product.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			int categoryId = product.getCategory().getId();
+			Category category = categoryDao.findById(Category.class, categoryId);
+			product.setCategory(category);
+			productDao.update(product);
+		} catch (Exception e) {
+			model.addAttribute("error" ,1);
+			System.out.println(e);
+			return "product-form";
+		}
+		
+		
+		return "redirect:../list/1";
+		
+	}
+	
+	@GetMapping("delete/{id}")
+	public String deleteCategory(@PathVariable("id") int id) {
+		Product product = productDao.findById(Product.class, id);
+		product.setActiveFlag(0);
+		productDao.update(product);
+		return "redirect:../list/1";
+	}
 }

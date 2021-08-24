@@ -1,41 +1,49 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
-<h1>Product List</h1>
-<a href="<%=request.getContextPath() %>/product/add">Add New product</a>
-<br/>
-<br/>
-<br/>
-<table border="2" width="70%" cellpadding="2">
-	<tr>
-		<th>Id</th>
-		<th>Code</th>
-		<th>Name</th>
-		<th>Price</th>
-		<th>Quantity</th>
-		<th>Sale</th>
-		<th>Image</th>
-		<th>Description</th>
-		<th>Edit</th>
-		<th>Delete</th>
-	</tr>
-	<c:forEach var="product" items="${list}">
-		<tr>
-			<td>${product.id}</td>
-			<td>${product.code}</td>
-			<td>${product.name}</td>
-			<td>${product.price}</td>
-			<td>${product.quantity}</td>
-			<td>${product.sale}</td>
-			<td><img width="30%" height="30%" src="data:image/jpeg;base64,${product.image}"></td>
-			<td>${product.description}</td>
-			<td><a href="<%=request.getContextPath() %>/product/edit?id=${product.id}">Edit</a></td>
-			<td><a href="<%=request.getContextPath() %>/product/delete?id=${product.id}">Delete</a></td>
-		</tr>
-	</c:forEach>
-</table>
-<c:forEach var="i" begin="1" end="${paging.totalPages}">
-		<a href="<%=request.getContextPath() %>/product/list/${i}">| ${i} |</a>
-	</c:forEach>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<div class="container">
+<div class="row">
+	<a href="<c:url value="/product/add" />" class="btn btn-info mx-auto" role="button">Add New Product</a>
+</div>
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead class="text-center">
+          <tr>
+            <th scope="col">STT</th>
+            <th scope="col" class="text-center" >Code</th>
+            <th scope="col" class="text-center" >Product Name</th>
+            <th scope="col" class="text-center" >Image</th>
+            <th scope="col" class="text-center" >Price</th>
+            <th scope="col" class="text-center" >Quantity</th>
+            <th scope="col" class="text-center" >Category Name</th>
+            <th scope="col" class="text-center" >Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        	<c:forEach var="product" items="${list}" varStatus="loop">
+        		<tr>
+		            <th scope="row">${loop.index +1}</th>
+		            <td>${product.code}</td>
+		            <td>${product.name}</td>
+		            <td><img width="30%" height="30%" src="data:image/jpeg;base64,${product.image}"></td>
+		            <td>${product.price}</td>
+		            <td>${product.quantity}</td>
+		            <td>${product.getCategory().getName()}</td>
+		            
+		            
+		            <td class="text-center">
+		            
+		              <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+		              <a href="<c:url value="/product/edit/${product.id }" />" class="btn btn-success" role="button"><i class="fas fa-edit"></i></a>
+		               <a href="<c:url value="/product/delete/${product.id }" />" class="btn btn-danger" role="button"><i class="far fa-trash-alt"></i></a>
+		          
+		            </td>
+          		</tr>
+        	</c:forEach>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
