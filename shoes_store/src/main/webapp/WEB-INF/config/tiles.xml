@@ -27,4 +27,13 @@
     <definition name="product-list" extends="layout">
     <put-attribute name="body" value="/WEB-INF/views/product/product-list.jsp" />
   </definition>
+  <definition name="invoice-list" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/invoice/invoice-list.jsp" />
+  </definition>
+  <definition name="invoice-form" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/invoice/invoice-form.jsp" />
+  </definition>
+  <definition name="invoice-details" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/invoice/invoice-details.jsp" />
+  </definition>
 </tiles-definitions>

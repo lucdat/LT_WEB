@@ -1,6 +1,8 @@
 package shoesstore.entities;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -30,24 +33,26 @@ public class Invoice {
 	private String description;
 	@Column(nullable = false)
 	private int activeFlag;	
-	@ManyToOne
-	@JoinColumn(name = "product_id",referencedColumnName = "id",nullable = true)
-	private Product product;
-	
+	@OneToMany(mappedBy = "invoice")
+	private Set<Import> imports = new HashSet<Import>();
 	public Invoice() {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public Invoice(int type, Date date, Double price, int quantity, String description, int activeFlag,
-			Product product) {
+			Set<Import> imports) {
 		this.type = type;
 		this.date = date;
 		this.price = price;
 		this.quantity = quantity;
 		this.description = description;
 		this.activeFlag = activeFlag;
-		this.product = product;
+		this.imports = imports;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -104,14 +109,10 @@ public class Invoice {
 	public void setActiveFlag(int activeFlag) {
 		this.activeFlag = activeFlag;
 	}
-
-	public Product getProduct() {
-		return product;
+	public Set<Import> getImports() {
+		return imports;
 	}
-
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setImports(Set<Import> imports) {
+		this.imports = imports;
 	}
-	
-
 }
