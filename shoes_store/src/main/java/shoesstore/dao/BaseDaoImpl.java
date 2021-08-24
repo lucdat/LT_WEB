@@ -88,6 +88,5 @@ public class BaseDaoImpl<E,ID> implements BaseDao<E, ID> {
 			generic = m.group(1);
 		}
 		return generic;
-	}
-	
+	}	
 }
