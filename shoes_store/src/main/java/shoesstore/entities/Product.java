@@ -6,13 +6,11 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -49,21 +47,22 @@ public class Product {
 	@JoinColumn(name = "cate_id",referencedColumnName = "id",nullable = true)
 	private Category category;
 	
-	@OneToMany(mappedBy = "products", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	private Set<Invoice> invoices = new  HashSet<Invoice>();
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private Set<Import> imports = new  HashSet<Import>();
 	
-	@ManyToMany(mappedBy = "products", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	private Set<Orders> orders = new HashSet<Orders>();
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
 	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<FeedBack> feedBacks = new HashSet<FeedBack>();
 	
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
+
 	
 	public Product(String code, String name, float sale, Double price, int quantity, String image, String description,
-			int activeFlag, MultipartFile file, Category category, Set<Invoice> invoices, Set<Orders> orders,
+			int activeFlag, MultipartFile file, Category category, Set<Import> imports, Set<OrderDetails> orderDetails,
 			Set<FeedBack> feedBacks) {
 		this.code = code;
 		this.name = name;
@@ -75,10 +74,11 @@ public class Product {
 		this.activeFlag = activeFlag;
 		this.file = file;
 		this.category = category;
-		this.invoices = invoices;
-		this.orders = orders;
+		this.imports = imports;
+		this.orderDetails = orderDetails;
 		this.feedBacks = feedBacks;
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -169,21 +169,24 @@ public class Product {
 		this.category = category;
 	}
 	
-	
-	public Set<Invoice> getInvoices() {
-		return invoices;
+	public Set<Import> getImports() {
+		return imports;
 	}
 
-	public void setInvoices(Set<Invoice> invoices) {
-		this.invoices = invoices;
+
+	public void setImports(Set<Import> imports) {
+		this.imports = imports;
 	}
 
-	public Set<Orders> getOrders() {
-		return orders;
+
+	public Set<OrderDetails> getOrderDetails() {
+		return orderDetails;
 	}
-	public void setOrders(Set<Orders> orders) {
-		this.orders = orders;
+
+	public void setOrderDetails(Set<OrderDetails> orderDetails) {
+		this.orderDetails = orderDetails;
 	}
+
 	public Set<FeedBack> getFeedBacks() {
 		return feedBacks;
 	}

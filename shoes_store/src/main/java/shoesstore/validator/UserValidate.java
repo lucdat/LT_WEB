@@ -1,20 +1,21 @@
 package shoesstore.validator;
 
+import java.util.List;
 
-//import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import shoesstore.entities.User;
-//import shoesstore.service.UserService;
+import shoesstore.service.UserService;
 
 @Component
 public class UserValidate implements Validator {
 
-//	@Autowired
-//	private UserService<User, Integer> userService;
+	@Autowired
+	private UserService<User, Integer> userService;
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return User.class.equals(clazz);
@@ -22,7 +23,7 @@ public class UserValidate implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-//		User user = (User)target;
+		User user = (User)target;
 		ValidationUtils.rejectIfEmpty(errors, "name", "msg.required");
 		ValidationUtils.rejectIfEmpty(errors, "email", "msg.required");
 		ValidationUtils.rejectIfEmpty(errors, "phone", "msg.required");
