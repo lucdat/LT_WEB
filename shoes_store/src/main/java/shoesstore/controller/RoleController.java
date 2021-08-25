@@ -54,4 +54,18 @@ public class RoleController {
 		roleService.update(role);
 		return "redirect:/role/list";
 	}
+	@GetMapping("edit/{roleId}")
+	public String updateForm(@PathVariable("roleId") Integer roleId,Model model) {
+		model.addAttribute("url", "../edit/"+roleId);
+		model.addAttribute("role", roleService.findById(Role.class, roleId));
+		return "role-update";
+	}
+	@PostMapping("edit/{roleId}")
+	public String updateUser(@ModelAttribute("role") Role roleUpdate,@PathVariable("roleId") Integer roleId) {
+		Role role =  roleService.findById(Role.class, roleId);
+		role.setName(roleUpdate.getName());
+		role.setDescription(roleUpdate.getDescription());
+		roleService.update(role);
+		return "redirect:/role/list";
+	}
 }

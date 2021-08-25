@@ -20,7 +20,7 @@ import shoesstore.service.ActionService;
 public class ActionController {
 	@Autowired
 	private ActionService<Action, Integer> actionService;
-	
+
 	@GetMapping("list")
 	public String redirectUserList() {
 		return "redirect:/action/list/1";
@@ -34,6 +34,7 @@ public class ActionController {
 		model.addAttribute("paging", paging);
 		return "action-list";
 	}
+
 	@GetMapping("add")
 	public String redirectUserForm(Model model) {
 		model.addAttribute("action", new Action());
@@ -49,8 +50,24 @@ public class ActionController {
 
 	@GetMapping("/delete/{actionId}")
 	public String deleteUser(@PathVariable("actionId") Integer actionId) {
-		Action action = actionService.findById(Action.class,actionId);
+		Action action = actionService.findById(Action.class, actionId);
 		action.setActiveFlag(0);
+		actionService.update(action);
+		return "redirect:/action/list";
+	}
+
+	@GetMapping("edit/{actionId}")
+	public String updateForm(@PathVariable("actionId") Integer roleId, Model model) {
+		model.addAttribute("url", "../edit/" + roleId);
+		model.addAttribute("action", actionService.findById(Action.class, roleId));
+		return "action-update";
+	}
+
+	@PostMapping("edit/{actionId}")
+	public String updateUser(@ModelAttribute("action") Action actionUpdate, @PathVariable("actionId") Integer actionId) {
+		Action action = actionService.findById(Action.class, actionId);
+		action.setUrl(actionUpdate.getUrl());
+		action.setName(actionUpdate.getName());
 		actionService.update(action);
 		return "redirect:/action/list";
 	}

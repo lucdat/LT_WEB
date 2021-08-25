@@ -26,11 +26,11 @@
 								class="">Quản lí user</a></li>
 						</ul>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="<%=request.getContextPath() %>//user/list"
+							<li class=""><a href="<%=request.getContextPath() %>/role/list"
 								class="">Quản lí role</a></li>
 						</ul>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="<%=request.getContextPath() %>//user/list"
+							<li class=""><a href="<%=request.getContextPath() %>/action/list"
 								class="">Quản lí action</a></li>
 						</ul>
 						<ul class="pcoded-submenu">

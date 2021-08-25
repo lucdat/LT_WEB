@@ -2,7 +2,6 @@ package shoesstore.controller;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +18,6 @@ import shoesstore.entities.Paging;
 @Controller
 @RequestMapping("invoice")
 public class InvoiceController {
-	private final static Logger log  = Logger.getLogger(InvoiceController.class);
 	@Autowired
 	private InvoiceDao<Invoice, Integer> invoiceDao;
 	@Autowired

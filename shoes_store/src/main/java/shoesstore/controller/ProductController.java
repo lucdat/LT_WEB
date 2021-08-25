@@ -2,14 +2,10 @@ package shoesstore.controller;
 
 import java.io.IOException;
 import java.util.Base64;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
-import org.apache.velocity.runtime.directive.Foreach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import shoesstore.dao.CategoryDao;
@@ -125,8 +119,6 @@ public class ProductController {
 			System.out.println(e);
 			return "product-form";
 		}
-		
-		
 		return "redirect:../list/1";
 		
 	}

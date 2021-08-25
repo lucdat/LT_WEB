@@ -5,10 +5,10 @@
 <div class="container">
     <div class="row">
       <div class="offset-lg-2 col-lg-8 col-sm-8 col-8 border rounded main-section">
-        <h3 class="text-center text-inverse">Add New User</h3>
+        <h3 class="text-center text-inverse">UPDATE ROLE</h3>
         <hr>
 
-        <form:form cssClass="container" modelAttribute="user" method="post" action="add"  >
+        <form:form cssClass="container" modelAttribute="role" method="post" action="${url}"  >
           <div class="row">
             <div class="col-lg-12 col-sm-12 col-12">
               <div class="form-group">
@@ -17,19 +17,9 @@
                 <form:errors path="name" cssStyle="color: red;"/>
               </div>  
                <div class="form-group">
-                <form:label path="email" cssClass="text-inverse">Email</form:label>
-                <form:input path="email" type="email" cssClass="form-control"  placeholder="Email" />
-                <form:errors path="email" cssStyle="color: red;"/>
-              </div>  
-               <div class="form-group">
-                <form:label path="phone" cssClass="text-inverse">Phone</form:label>
-                <form:input path="phone" cssClass="form-control"  placeholder="Phone" />
-                <form:errors path="phone" cssStyle="color: red;"/>
-              </div>  
-               <div class="form-group">
-                <form:label path="password" cssClass="text-inverse">Password</form:label>
-                <form:input path="password" type="password" cssClass="form-control"  placeholder="Password" />
-                <form:errors path="password" cssStyle="color: red;"/>
+                <form:label path="description" cssClass="text-inverse">Description</form:label>
+                <form:input path="description" cssClass="form-control"  placeholder="description" />
+                <form:errors path="description" cssStyle="color: red;"/>
               </div>  
             </div>
           </div>

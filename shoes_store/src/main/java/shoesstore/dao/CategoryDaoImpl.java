@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import shoesstore.entities.Category;
-import shoesstore.entities.Product;
 
 @Repository
 @Transactional(rollbackOn = Exception.class)
