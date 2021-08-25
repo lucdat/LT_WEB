@@ -18,9 +18,7 @@ public class Category {
 	private Integer id;
 	@Column(unique = true,nullable = false,length = 50)
 	private String name;
-	@Column(nullable = false)
-	private int activeFlag;
-	
+
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
 	private Set<Product> products = new HashSet<Product>();
 	
@@ -30,7 +28,6 @@ public class Category {
 
 	public Category(String name, int activeFlag) {
 		this.name = name;
-		this.activeFlag = activeFlag;
 	}
 
 	public Integer getId() {
@@ -48,15 +45,6 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getActiveFlag() {
-		return activeFlag;
-	}
-
-	public void setActiveFlag(int activeFlag) {
-		this.activeFlag = activeFlag;
-	}
-
 	public Set<Product> getProducts() {
 		return products;
 	}

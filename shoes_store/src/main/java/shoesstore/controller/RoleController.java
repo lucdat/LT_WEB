@@ -42,7 +42,6 @@ public class RoleController {
 
 	@PostMapping("add")
 	public String addUser(@ModelAttribute("role") Role role) {
-		role.setActiveFlag(1);
 		roleService.insert(role);
 		return "redirect:/role/list";
 	}
@@ -50,8 +49,7 @@ public class RoleController {
 	@GetMapping("/delete/{roleId}")
 	public String deleteUser(@PathVariable("roleId") Integer roleId) {
 		Role role = roleService.findById(Role.class, roleId);
-		role.setActiveFlag(0);
-		roleService.update(role);
+		roleService.delete(role);
 		return "redirect:/role/list";
 	}
 	@GetMapping("edit/{roleId}")

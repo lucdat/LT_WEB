@@ -32,8 +32,6 @@ public class User {
 	@Lob
 	@Column(columnDefinition = "MEDIUMBLOB")
 	private String image;
-	@Column(nullable = false)
-	private int activeFlag;
 	
 	@Transient
 	private MultipartFile file;
@@ -51,7 +49,7 @@ public class User {
 	public User() {
 	}
 	
-	public User(String name, String email, String phone, String password, String image, int activeFlag,
+	public User(String name, String email, String phone, String password, String image,
 			MultipartFile file, Role role, Set<FeedBack> feedBacks, Set<Orders> orders) {
 		super();
 		this.name = name;
@@ -59,7 +57,6 @@ public class User {
 		this.phone = phone;
 		this.password = password;
 		this.image = image;
-		this.activeFlag = activeFlag;
 		this.file = file;
 		this.role = role;
 		this.feedBacks = feedBacks;
@@ -114,14 +111,6 @@ public class User {
 
 	public String getImage() {
 		return image;
-	}
-
-	public int getActiveFlag() {
-		return activeFlag;
-	}
-
-	public void setActiveFlag(int activeFlag) {
-		this.activeFlag = activeFlag;
 	}
 
 	public Role getRole() {

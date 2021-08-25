@@ -32,8 +32,8 @@ public class BaseDaoImpl<E,ID> implements BaseDao<E, ID> {
 		StringBuilder query = new StringBuilder("");
 		StringBuilder countQuery = new StringBuilder("");
 		
-		query.append("from ").append(getGenericName()).append(" as model where model.activeFlag=1");
-		countQuery.append("select count(*) from ").append(getGenericName()).append(" as model where model.activeFlag=1");
+		query.append("from ").append(getGenericName());
+		countQuery.append("select count(*) from ").append(getGenericName());
 		log.info("Query: "+query.toString());
 		log.info("Count query: "+countQuery.toString());
 		Query<E> result = sessionFactory.getCurrentSession().createQuery(query.toString());
@@ -58,8 +58,7 @@ public class BaseDaoImpl<E,ID> implements BaseDao<E, ID> {
 	public List<E> findByProperty(String property, Object value) {
 		log.info("find by property "+property+" "+value.toString());
 		StringBuilder query = new StringBuilder("");
-		query.append("from ").append(getGenericName())
-			 .append(" as model where model.activeFlag=1 and model.").append(property).append("=?");
+		query.append("from ").append(getGenericName()).append(property).append("=?");
 		Query<E> result = sessionFactory.getCurrentSession()
 										.createQuery(query.toString()).setParameter(0, value);
 		log.info(query);
@@ -88,5 +87,11 @@ public class BaseDaoImpl<E,ID> implements BaseDao<E, ID> {
 			generic = m.group(1);
 		}
 		return generic;
+	}
+
+	@Override
+	public void delete(E instance) {
+		sessionFactory.getCurrentSession().delete(instance);
+		
 	}	
 }

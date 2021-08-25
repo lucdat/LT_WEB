@@ -43,7 +43,6 @@ public class ActionController {
 
 	@PostMapping("add")
 	public String addUser(@ModelAttribute("action") Action action) {
-		action.setActiveFlag(1);
 		actionService.insert(action);
 		return "redirect:/action/list";
 	}
@@ -51,8 +50,7 @@ public class ActionController {
 	@GetMapping("/delete/{actionId}")
 	public String deleteUser(@PathVariable("actionId") Integer actionId) {
 		Action action = actionService.findById(Action.class, actionId);
-		action.setActiveFlag(0);
-		actionService.update(action);
+		actionService.delete(action);
 		return "redirect:/action/list";
 	}
 

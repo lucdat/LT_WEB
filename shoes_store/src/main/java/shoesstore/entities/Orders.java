@@ -37,7 +37,6 @@ public class Orders {
 
 
 	public Orders(Double sumPrice, int status, String address, Set<OrderDetails> orderDetails, User user) {
-		super();
 		this.sumPrice = sumPrice;
 		this.status = status;
 		this.address = address;

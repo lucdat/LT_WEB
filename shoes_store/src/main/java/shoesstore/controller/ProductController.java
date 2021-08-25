@@ -73,7 +73,6 @@ public class ProductController {
 			}
 			int categoryId = product.getCategory().getId();
 			Category category = categoryDao.findById(Category.class, categoryId);
-			product.setActiveFlag(1);
 			category.getProducts().add(product);
 			product.setCategory(category);
 			System.out.println(product.getPrice());
@@ -126,7 +125,6 @@ public class ProductController {
 	@GetMapping("delete/{id}")
 	public String deleteCategory(@PathVariable("id") int id) {
 		Product product = productDao.findById(Product.class, id);
-		product.setActiveFlag(0);
 		productDao.update(product);
 		return "redirect:../list/1";
 	}

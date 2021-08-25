@@ -20,8 +20,6 @@ public class Role {
 	private String name;
 	@Column(nullable = false,length = 200)
 	private String description;
-	@Column(nullable = false)
-	private int activeFlag;
 	
 	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
 	private Set<User> users =new HashSet<User>();
@@ -32,10 +30,9 @@ public class Role {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Role(String name, String description, int activeFlag, Set<User> users, Set<Action> actions) {
+	public Role(String name, String description, Set<User> users, Set<Action> actions) {
 		this.name = name;
 		this.description = description;
-		this.activeFlag = activeFlag;
 		this.users = users;
 		this.actions = actions;
 	}
@@ -62,14 +59,6 @@ public class Role {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public int getActiveFlag() {
-		return activeFlag;
-	}
-
-	public void setActiveFlag(int activeFlag) {
-		this.activeFlag = activeFlag;
 	}
 
 	public Set<User> getUsers() {

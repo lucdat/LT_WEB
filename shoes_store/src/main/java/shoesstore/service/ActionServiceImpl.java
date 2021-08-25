@@ -44,4 +44,9 @@ public class ActionServiceImpl  implements ActionService<Action, Integer>{
 		actionDao.update(instance);
 	}
 
+	@Override
+	public void delete(Action instance) {
+		actionDao.delete(instance);
+	}
+
 }

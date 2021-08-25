@@ -16,12 +16,14 @@ public class Import {
 	@Column(nullable = false)
 	private Double price;
 	@Column(nullable = false)
+	private int size;
+	@Column(nullable = false,length = 30)
+	private String color;
+	@Column(nullable = false)
 	private int type;
 	@Column(nullable = false)
 	private int quantity;
-	@Column(nullable = false)
-	private int activeFlag;	
-	
+
 	@ManyToOne
 	@JoinColumn(name = "product_id",referencedColumnName = "id",nullable = true)
 	private Product product;
@@ -31,19 +33,15 @@ public class Import {
 	public Import() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	public Import(Double price, int type, int quantity, int activeFlag, Product product, Invoice invoice) {
-		super();
+	public Import(Double price, int size, String color, int type, int quantity, Product product, Invoice invoice) {
 		this.price = price;
+		this.size = size;
+		this.color = color;
 		this.type = type;
 		this.quantity = quantity;
-		this.activeFlag = activeFlag;
 		this.product = product;
 		this.invoice = invoice;
 	}
-
-
 	public Double getPrice() {
 		return price;
 	}
@@ -76,23 +74,23 @@ public class Import {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public int getActiveFlag() {
-		return activeFlag;
-	}
-
-	public void setActiveFlag(int activeFlag) {
-		this.activeFlag = activeFlag;
-	}
-
-
 	public int getType() {
 		return type;
 	}
-
-
 	public void setType(int type) {
 		this.type = type;
+	}
+	public int getSize() {
+		return size;
+	}
+	public void setSize(int size) {
+		this.size = size;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
 	}
 	
 }

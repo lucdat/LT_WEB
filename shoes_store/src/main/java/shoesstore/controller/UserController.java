@@ -73,7 +73,6 @@ public class UserController {
 		if (result.hasErrors()) {
 			return "user-form";
 		}
-		user.setActiveFlag(1);
 		userService.insert(user);
 		return "redirect:/user/list";
 	}
@@ -81,8 +80,7 @@ public class UserController {
 	@GetMapping("/delete/{userId}")
 	public String deleteUser(@PathVariable("userId") Integer userId) {
 		User user = userService.findById(User.class, userId);
-		user.setActiveFlag(0);
-		userService.update(user);
+		userService.delete(user);
 		return "redirect:/user/list";
 	}
 	@GetMapping("edit/{userId}")

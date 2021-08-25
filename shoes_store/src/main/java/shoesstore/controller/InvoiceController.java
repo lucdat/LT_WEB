@@ -45,7 +45,6 @@ public class InvoiceController {
 	@GetMapping("delete/{id}")
 	public String deleteCategory(@PathVariable("id") int id) {
 		Invoice invoice = invoiceDao.findById(Invoice.class, id);
-		invoice.setActiveFlag(0);
 		invoiceDao.update(invoice);
 		return "redirect:../list/1";
 	}

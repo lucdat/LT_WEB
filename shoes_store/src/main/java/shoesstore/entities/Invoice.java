@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,8 +29,6 @@ public class Invoice {
 	private int quantity;
 	@Column(nullable = false,length = 200)
 	private String description;
-	@Column(nullable = false)
-	private int activeFlag;	
 	@OneToMany(mappedBy = "invoice")
 	private Set<Import> imports = new HashSet<Import>();
 	public Invoice() {
@@ -41,14 +37,13 @@ public class Invoice {
 
 	
 
-	public Invoice(int type, Date date, Double price, int quantity, String description, int activeFlag,
+	public Invoice(int type, Date date, Double price, int quantity, String description,
 			Set<Import> imports) {
 		this.type = type;
 		this.date = date;
 		this.price = price;
 		this.quantity = quantity;
 		this.description = description;
-		this.activeFlag = activeFlag;
 		this.imports = imports;
 	}
 
@@ -100,14 +95,6 @@ public class Invoice {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public int getActiveFlag() {
-		return activeFlag;
-	}
-
-	public void setActiveFlag(int activeFlag) {
-		this.activeFlag = activeFlag;
 	}
 	public Set<Import> getImports() {
 		return imports;

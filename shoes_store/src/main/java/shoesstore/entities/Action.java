@@ -21,8 +21,6 @@ public class Action {
 	private String name;
 	@Column(unique = true,nullable = false,length = 150)
 	private String url;
-	@Column(nullable = false)
-	private int activeFlag;
 	
 	@Transient
 	List<Action> actions;
@@ -35,12 +33,11 @@ public class Action {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Action(Integer parentId, String name, String url, int activeFlag, Role role) {
+	public Action(Integer parentId, String name, String url,Role role) {
 		super();
 		this.parentId = parentId;
 		this.name = name;
 		this.url = url;
-		this.activeFlag = activeFlag;
 		this.role = role;
 	}
 
@@ -70,14 +67,6 @@ public class Action {
 		this.url = url;
 	}
 
-	public int getActiveFlag() {
-		return activeFlag;
-	}
-
-	public void setActiveFlag(int activeFlag) {
-		this.activeFlag = activeFlag;
-	}
-
 	public Role getRole() {
 		return role;
 	}
@@ -101,6 +90,5 @@ public class Action {
 	public void setActions(List<Action> actions) {
 		this.actions = actions;
 	}
-	
 	
 }

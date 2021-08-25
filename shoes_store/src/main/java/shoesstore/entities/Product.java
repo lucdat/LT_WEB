@@ -37,8 +37,6 @@ public class Product {
 	private String image;
 	@Column(nullable = false,length = 100)
 	private String description;
-	@Column(nullable = false)
-	private int activeFlag;
 	
 	@Transient
 	private MultipartFile file;
@@ -62,7 +60,7 @@ public class Product {
 
 	
 	public Product(String code, String name, float sale, Double price, int quantity, String image, String description,
-			int activeFlag, MultipartFile file, Category category, Set<Import> imports, Set<OrderDetails> orderDetails,
+			MultipartFile file, Category category, Set<Import> imports, Set<OrderDetails> orderDetails,
 			Set<FeedBack> feedBacks) {
 		this.code = code;
 		this.name = name;
@@ -71,7 +69,6 @@ public class Product {
 		this.quantity = quantity;
 		this.image = image;
 		this.description = description;
-		this.activeFlag = activeFlag;
 		this.file = file;
 		this.category = category;
 		this.imports = imports;
@@ -151,14 +148,6 @@ public class Product {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public int getActiveFlag() {
-		return activeFlag;
-	}
-
-	public void setActiveFlag(int activeFlag) {
-		this.activeFlag = activeFlag;
 	}
 
 	public Category getCategory() {

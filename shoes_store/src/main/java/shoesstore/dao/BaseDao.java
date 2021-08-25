@@ -10,4 +10,5 @@ public interface BaseDao<E,ID> {
 	List<E> findByProperty(String property,Object value);
 	int insert(E instance);
 	void update(E instance);
+	void delete(E instance);
 }
