@@ -48,9 +48,9 @@
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
+                    <a class="nav-icon position-relative text-decoration-none" href="<c:url value="/login" />">
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                
                     </a>
                 </div>
             </div>
