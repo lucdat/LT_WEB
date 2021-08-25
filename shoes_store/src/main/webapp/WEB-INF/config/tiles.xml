@@ -9,6 +9,14 @@
     <put-attribute name="body" value="" />
     <put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
   </definition>
+  
+  <definition name="client" template="/WEB-INF/views/layout/client/layout.jsp">
+    <put-attribute name="header" value="/WEB-INF/views/layout/client/header.jsp" />
+    <put-attribute name="menu" value="/WEB-INF/views/layout/client/menu.jsp" />
+    <put-attribute name="body" value="" />
+    <put-attribute name="footer" value="/WEB-INF/views/layout/client/footer.jsp" />
+  </definition>
+  
   <definition name="index" extends="layout">
     <put-attribute name="body" value="/WEB-INF/views/index.jsp" />
   </definition>
@@ -59,5 +67,18 @@
   </definition>
    <definition name="action-update" extends="layout">
     <put-attribute name="body" value="/WEB-INF/views/action/action-update.jsp" />
+  </definition>
+  
+  <definition name="index" extends="client">
+    <put-attribute name="body" value="/WEB-INF/views/client/index.jsp"/>
+  </definition>
+  <definition name="about" extends="client">
+    <put-attribute name="body" value="/WEB-INF/views/client/about.jsp"/>
+  </definition>
+  <definition name="contact" extends="client">
+    <put-attribute name="body" value="/WEB-INF/views/client/contact.jsp"/>
+  </definition>
+  <definition name="shop" extends="client">
+    <put-attribute name="body" value="/WEB-INF/views/client/shop.jsp"/>
   </definition>
 </tiles-definitions>
