@@ -25,4 +25,8 @@ public class HomeController {
 	public String detail() {
 		return "detail";
 	}
+	@GetMapping("/card")
+	public String card() {
+		return "card";
+	}
 }

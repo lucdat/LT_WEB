@@ -84,4 +84,7 @@
   <definition name="detail" extends="client">
     <put-attribute name="body" value="/WEB-INF/views/client/detail.jsp"/>
   </definition>
+  <definition name="card" extends="client">
+    <put-attribute name="body" value="/WEB-INF/views/client/card.jsp"/>
+  </definition>
 </tiles-definitions>
