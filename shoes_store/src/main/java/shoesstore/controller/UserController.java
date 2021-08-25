@@ -101,11 +101,12 @@ public class UserController {
 			if(fileName.contains(".."))
 			{
 				return "user-update";
-			}
-			try {
-				userUpdate.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
-			} catch (IOException e) {
-				e.printStackTrace();
+			}else if(file!=null&&!file.isEmpty()) {
+				try {
+					userUpdate.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			if(userUpdate.getRole().getId()!=null) {
 				int roleId = userUpdate.getRole().getId();

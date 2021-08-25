@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import shoesstore.dao.ImportDao;
 import shoesstore.dao.InvoiceDao;
-import shoesstore.entities.Import;
 import shoesstore.entities.Invoice;
 import shoesstore.entities.Paging;
 
@@ -21,7 +19,6 @@ public class InvoiceController {
 	@Autowired
 	private InvoiceDao<Invoice, Integer> invoiceDao;
 	@Autowired
-	private ImportDao<Import, Integer> importDao;
 	@GetMapping
 	public String dafault() {
 		return "redirect:list/1";
@@ -50,11 +47,11 @@ public class InvoiceController {
 		return "redirect:../list/1";
 	}
 	
-	@GetMapping("detail/{id}")
-	public String findDetailsInvoice(@PathVariable("id") int id, Model model) {
-		List<Import> imports = importDao.findByProperty("invoice.id", id);
-		model.addAttribute("listImport",imports);
-		return "invoice-details";
-	}	
-	
+//	@GetMapping("detail/{id}")
+//	public String findDetailsInvoice(@PathVariable("id") int id, Model model) {
+//		List<Import> imports = importDao.findByProperty("invoice.id", id);
+//		model.addAttribute("listImport",imports);
+//		return "invoice-details";
+//	}	
+//	
 }

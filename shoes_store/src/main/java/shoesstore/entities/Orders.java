@@ -6,12 +6,14 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Orders {
@@ -21,27 +23,28 @@ public class Orders {
 	private Double sumPrice;
 	@Column(nullable = false)
 	private int status;
-	@Column(nullable = false,length = 100)
+	@Column(nullable = false, length = 100)
 	private String address;
-	
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
-	
+
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinTable(name = "order_details", 
+			joinColumns = {@JoinColumn(name = "order_id",referencedColumnName = "id") }, 
+			inverseJoinColumns = { @JoinColumn(name = "product_id",referencedColumnName = "id") })
+	private Set<Product> products = new HashSet<Product>();
+
 	@ManyToOne
-	@JoinColumn(name = "user_id",nullable = true,insertable = false,updatable = false)
+	@JoinColumn(name = "user_id", nullable = true, insertable = false, updatable = false)
 	private User user;
-	
+
 	public Orders() {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public Orders(Double sumPrice, int status, String address, Set<OrderDetails> orderDetails, User user) {
-		super();
+	public Orders(Double sumPrice, int status, String address, Set<Product> products, User user) {
 		this.sumPrice = sumPrice;
 		this.status = status;
 		this.address = address;
-		this.orderDetails = orderDetails;
+		this.products = products;
 		this.user = user;
 	}
 
@@ -69,13 +72,14 @@ public class Orders {
 		this.status = status;
 	}
 
-	public Set<OrderDetails> getOrderDetails() {
-		return orderDetails;
+	public Set<Product> getProducts() {
+		return products;
 	}
 
-	public void setOrderDetails(Set<OrderDetails> orderDetails) {
-		this.orderDetails = orderDetails;
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
+
 	public User getUser() {
 		return user;
 	}
@@ -84,12 +88,12 @@ public class Orders {
 		this.user = user;
 	}
 
-
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 }

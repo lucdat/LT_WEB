@@ -4,14 +4,16 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -23,36 +25,37 @@ public class Invoice {
 	@Column(nullable = false)
 	private int type;
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(nullable = false,length = 100)
+	@Column(nullable = false, length = 100)
 	private Date date;
 	@Column(nullable = false)
 	private Double price;
 	@Column(nullable = false)
 	private int quantity;
-	@Column(nullable = false,length = 200)
+	@Column(nullable = false, length = 200)
 	private String description;
 	@Column(nullable = false)
-	private int activeFlag;	
-	@OneToMany(mappedBy = "invoice")
-	private Set<Import> imports = new HashSet<Import>();
+	private int activeFlag;
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinTable(name = "invoice_details", 
+			joinColumns = { @JoinColumn(name = "invoice_id",referencedColumnName = "id") }, 
+			inverseJoinColumns = {@JoinColumn(name = "product_id",referencedColumnName = "id") }
+	)
+	private Set<Product> products = new HashSet<Product>();
+
 	public Invoice() {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
 	public Invoice(int type, Date date, Double price, int quantity, String description, int activeFlag,
-			Set<Import> imports) {
+			Set<Product> products) {
 		this.type = type;
 		this.date = date;
 		this.price = price;
 		this.quantity = quantity;
 		this.description = description;
 		this.activeFlag = activeFlag;
-		this.imports = imports;
+		this.products = products;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -109,10 +112,13 @@ public class Invoice {
 	public void setActiveFlag(int activeFlag) {
 		this.activeFlag = activeFlag;
 	}
-	public Set<Import> getImports() {
-		return imports;
+
+	public Set<Product> getProducts() {
+		return products;
 	}
-	public void setImports(Set<Import> imports) {
-		this.imports = imports;
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
+
 }
