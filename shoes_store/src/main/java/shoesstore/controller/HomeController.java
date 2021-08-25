@@ -21,4 +21,8 @@ public class HomeController {
 	public String shop() {
 		return "shop";
 	}
+	@GetMapping("/detail")
+	public String detail() {
+		return "detail";
+	}
 }
