@@ -26,16 +26,16 @@ public class Product {
 	private String code;
 	@Column(nullable = false,length = 50)
 	private String name;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private float sale;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Double price;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private int quantity;
 	@Lob
 	@Column(columnDefinition = "MEDIUMBLOB")
 	private String image;
-	@Column(nullable = false,length = 100)
+	@Column(nullable = true,length = 100)
 	private String description;
 	
 	@Transient
