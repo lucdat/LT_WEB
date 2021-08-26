@@ -28,25 +28,25 @@
             <div class="col-lg-3">
                 <h1 class="h2 pb-4">Thể loại</h1>
                 <ul class="list-unstyled templatemo-accordion">
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Gender
-                        </a>
-                        
-                    </li>
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Sale
-                            
-                        </a>
-                        
-                    </li>
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Product
-                            
-                        </a>
-                    </li>
+                	<c:forEach var="category" items="${categories}" varStatus="loop">
+                			<c:choose>
+                				<c:when test="${category.id== id}">
+                					
+									      <a class="pb-3 collapsed d-flex justify-content-between h3 text-decoration-none text-danger" href="<c:url value="/shop/${category.id }" />">
+					                            ${category.name }
+					                        </a>
+
+							    </c:when>    
+							    <c:otherwise>
+							         <a class="pb-3 collapsed d-flex justify-content-between h3 text-decoration-none active" href="<c:url value="/shop/${category.id }" />">
+			                            ${category.name }
+			                        </a>
+							    </c:otherwise>
+                			</c:choose>
+		                       
+	                      	
+	               
+                	</c:forEach>
                 </ul>
             </div>
 

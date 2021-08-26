@@ -18,6 +18,7 @@
       <!-- Slick -->
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/assets/css/slick.min.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/assets/css/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/assets/css/feedback.css">
 <!--
 </head>
 
