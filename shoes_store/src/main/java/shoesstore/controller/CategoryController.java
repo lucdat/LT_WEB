@@ -71,7 +71,7 @@ public class CategoryController {
 	@GetMapping("delete/{id}")
 	public String deleteCategory(@PathVariable("id") int id) {
 		Category category = categoryDao.findById(Category.class, id);
-		categoryDao.update(category);
+		categoryDao.delete(category);
 		return "redirect:../list/1";
 	}
 

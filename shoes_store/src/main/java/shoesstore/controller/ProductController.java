@@ -73,9 +73,7 @@ public class ProductController {
 			}
 			int categoryId = product.getCategory().getId();
 			Category category = categoryDao.findById(Category.class, categoryId);
-			category.getProducts().add(product);
 			product.setCategory(category);
-			System.out.println(product.getPrice());
 			productDao.insert(product);
 		} catch (Exception e) {
 			model.addAttribute("error" ,1);

@@ -17,10 +17,7 @@ public class HomeController {
 	public String contact() {
 		return "contact";
 	}
-	@GetMapping("/shop")
-	public String shop() {
-		return "shop";
-	}
+	
 	@GetMapping("/detail")
 	public String detail() {
 		return "detail";

@@ -52,7 +52,7 @@
 	  <c:choose>
 		    <c:when test="${paging.indexPage >1}">
 		        <li class="page-item ">
-	      			<a class="page-link" href="<c:url value="/category/list/${paging.indexPage-1 }" />" tabindex="-1">Previous</a>
+	      			<a class="page-link" href="<c:url value="/product/list/${paging.indexPage-1 }" />" tabindex="-1">Previous</a>
 	    		</li> 
 		    </c:when>    
 		    <c:otherwise>
@@ -65,10 +65,10 @@
 	    <c:forEach var = "i" begin = "1" end ="${paging.getTotalPages() }">
          <c:choose>
 		    <c:when test="${paging.indexPage== i}">
-		        <li class="page-item active disabled"><a class="page-link active" href="<c:url value="/category/list/${i }" />">${i }</a></li>
+		        <li class="page-item active disabled"><a class="page-link active" href="<c:url value="/product/list/${i }" />">${i }</a></li>
 		    </c:when>    
 		    <c:otherwise>
-		        <li class="page-item"><a class="page-link" href="<c:url value="/category/list/${i }" />">${i }</a></li>
+		        <li class="page-item"><a class="page-link" href="<c:url value="/product/list/${i }" />">${i }</a></li>
 		    </c:otherwise>
 		</c:choose>
          
@@ -76,7 +76,7 @@
       <c:choose>
 		    <c:when test="${paging.indexPage <paging.getTotalPages()}">
 		        <li class="page-item ">
-	      			<a class="page-link" href="<c:url value="/category/list/${paging.indexPage +1}" />">Next</a>
+	      			<a class="page-link" href="<c:url value="/product/list/${paging.indexPage +1}" />">Next</a>
 	    		</li> 
 		    </c:when>    
 		    <c:otherwise>

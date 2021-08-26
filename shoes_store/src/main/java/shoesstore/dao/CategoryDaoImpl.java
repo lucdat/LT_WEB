@@ -22,8 +22,8 @@ public class CategoryDaoImpl extends BaseDaoImpl<Category, Integer> implements C
 	public List<Category> findAll() {
 		StringBuilder query = new StringBuilder("");
 		StringBuilder countQuery = new StringBuilder("");
-		query.append("from ").append(getGenericName()).append(" as model where model.activeFlag=1");
-		countQuery.append("select count(*) from ").append(getGenericName()).append(" as model where model.activeFlag=1");
+		query.append("from ").append(getGenericName());
+		countQuery.append("select count(*) from ").append(getGenericName());
 		Query<Category> result = sessionFactory.getCurrentSession().createQuery(query.toString());
 		return result.list();
 	}
