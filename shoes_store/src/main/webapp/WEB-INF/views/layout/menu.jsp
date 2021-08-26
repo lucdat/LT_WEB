@@ -34,11 +34,11 @@
 								class="">Quản lí action</a></li>
 						</ul>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="<%=request.getContextPath() %>//user/list"
+							<li class=""><a href="<%=request.getContextPath() %>/category/"
 								class="">Quản lí category</a></li>
 						</ul>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="<%=request.getContextPath() %>//user/list"
+							<li class=""><a href="<%=request.getContextPath() %>/product"
 								class="">Quản lí product</a></li>
 						</ul>
 						<ul class="pcoded-submenu">

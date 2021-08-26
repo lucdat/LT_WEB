@@ -30,4 +30,8 @@ public class HomeController {
 	public String login() {
 		return "auth/login";
 	}
+	@GetMapping("/admin")
+	public String admin() {
+		return "admin";
+	}
 }
