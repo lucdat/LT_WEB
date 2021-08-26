@@ -211,6 +211,36 @@
     </section>
     <!-- Close Content -->
 
+	<div class="container">
+        <div class="detailBox justify-content-center">
+            <div class="commentBox text-center">
+                
+                <p class="taskDescription">Phản Hồi Từ Những Khách Đã Mua Sản Phẩm</p>
+            </div>
+            <div class="actionBox">
+                <ul class="commentList">
+                    <li>
+                        <div class="commenterImage">
+                          <img src="http://lorempixel.com/50/50/people/9" />
+                        </div>
+                        <div class="commentText">
+                            <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
+        
+                        </div>
+                    </li>
+                </ul>
+                <form class="form-inline cc" role="form" action="/cc">
+                    <div class="form-group justify-content-center">
+                        <input class="form-control" type="text" placeholder="Your comments" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit"  class="btn btn-info" value="post"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+	
     <!-- Start Article -->
     <section class="py-5">
         <div class="container">
