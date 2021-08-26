@@ -27,4 +27,5 @@ public class CategoryDaoImpl extends BaseDaoImpl<Category, Integer> implements C
 		Query<Category> result = sessionFactory.getCurrentSession().createQuery(query.toString());
 		return result.list();
 	}
+	
 }

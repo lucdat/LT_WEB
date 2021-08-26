@@ -6,6 +6,6 @@ import shoesstore.entities.Product;
 
 @Repository
 @Transactional(rollbackOn = Exception.class)
-public class ProductDaoImpl extends BaseDaoImpl<Product, Integer> implements ProductDao<Product, Integer> {
-
+public class ProductDaoImpl<E> extends BaseDaoImpl<Product, Integer> implements ProductDao<Product, Integer> {
+	
 }

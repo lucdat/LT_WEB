@@ -7,5 +7,4 @@ import shoesstore.entities.Category;
 public interface CategoryDao<E,ID> extends BaseDao<E, ID> {
 
 	public List<Category> findAll();
-	
 }
