@@ -58,7 +58,7 @@ public class BaseDaoImpl<E,ID> implements BaseDao<E, ID> {
 	public List<E> findByProperty(String property, Object value) {
 		log.info("find by property "+property+" "+value.toString());
 		StringBuilder query = new StringBuilder("");
-		query.append("from ").append(getGenericName()).append("as model where model.").append(property).append("=?");
+		query.append("from ").append(getGenericName()).append(" as model where model.").append(property).append("=?");
 		Query<E> result = sessionFactory.getCurrentSession()
 										.createQuery(query.toString()).setParameter(0, value);
 		log.info(query);
