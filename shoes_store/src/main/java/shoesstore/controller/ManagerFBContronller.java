@@ -38,7 +38,8 @@ public class ManagerFBContronller {
 	@RequestMapping("manager-feeback/delete/{id}")
 	public String delete(@PathVariable("id") int id , Model model) {
 		FeedBack feedBack = managerFeedBackDao.findById(FeedBack.class, id);
+		int idP = feedBack.getProduct().getId();
 		managerFeedBackDao.delete(feedBack);
-		return "feedback-admin";
+		return "redirect:../../manager-feeback/" + idP;
 	}
 }
