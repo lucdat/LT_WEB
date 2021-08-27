@@ -41,6 +41,7 @@ public class LoginController {
 		
 		if(user!=null && !user.isEmpty()) {
 			if(user.get(0).getPassword().equals(account.getPassword())) {
+				session1.setAttribute("id", user.get(0).getId());
 				session1.setAttribute("usernameC", user.get(0).getEmail());
 				session1.setAttribute("nameC", user.get(0).getName());
 				session1.setAttribute("imageC", user.get(0).getImage());
@@ -50,6 +51,7 @@ public class LoginController {
 				}
 				else {
 					model.addAttribute("message", "Not Account Customer");
+					session1.invalidate();
 					return "auth/login";
 				}
 			}
@@ -87,6 +89,7 @@ public class LoginController {
 				}
 				else {
 					model.addAttribute("message", "Not Account Admin");
+					session.invalidate();
 					return "auth/loginadmin";
 				}
 			}
@@ -105,18 +108,12 @@ public class LoginController {
 	
 	@GetMapping("logoutadmin")
 	public String logoutAdmin(HttpSession session) {
-		session.removeAttribute("username");
-		session.removeAttribute("name");
-		session.removeAttribute("image");
-		session.removeAttribute("role");
+		session.invalidate();
 		return "redirect:loginadmin";
 	}
 	@GetMapping("logout")
 	public String logout(HttpSession session1) {
-		session1.removeAttribute("usernameC");
-		session1.removeAttribute("nameC");
-		session1.removeAttribute("imageC");
-		session1.removeAttribute("roleC");
+		session1.invalidate();
 		return "redirect:login";
 	}
 }
