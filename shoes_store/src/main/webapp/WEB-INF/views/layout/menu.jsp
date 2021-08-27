@@ -53,6 +53,10 @@
 							<li class=""><a href="<%=request.getContextPath() %>//user/list"
 								class="">Quản lí orderDetails</a></li>
 						</ul>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="<%=request.getContextPath() %>/statistical_cost"
+								class="">Thống Kê Chi Phí Nhập </a></li>
+						</ul>
 				</li>
 			</ul>
 

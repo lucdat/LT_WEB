@@ -99,4 +99,11 @@
   <definition name="order-list" extends="layout">
     <put-attribute name="body" value="/WEB-INF/views/order/order-list.jsp" />
   </definition>
+  
+  <definition name="statistical_cost" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/statistical/cost.jsp" />
+  </definition>
+  <definition name="statistical_end" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/statistical/list_statistical.jsp" />
+  </definition>
 </tiles-definitions>
