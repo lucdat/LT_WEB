@@ -90,4 +90,10 @@
   <definition name="checkout-form" extends="client">
     <put-attribute name="body" value="/WEB-INF/views/client/checkout-form.jsp"/>
   </definition>
+  <definition name="feedback-admin" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/mangerfeedbacks/feedback.jsp" />
+  </definition>
+    <definition name="admin" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/index.jsp" />
+  </definition>
 </tiles-definitions>
