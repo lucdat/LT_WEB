@@ -41,19 +41,39 @@
                             </div>
                         </div>
                     </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+                    
+                    
+                    <c:if test="${sessionScope.username!=null }">
+                    	<a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                    </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="<c:url value="/card" />">
+                    	</a>
+                    	<a class="nav-icon position-relative text-decoration-none" href="<c:url value="/card" />">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span id="cnt" class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+						<span id="cnt" class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
                				${card.count}
-               			</span>
-                    </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="<c:url value="/login" />">
-                        <i class="fa fa-key" aria-hidden="true"></i>
-                
-                    </a>
+               			</span>                    	</a>
+                    	<a class="nav-icon position-relative text-decoration-none" href="<c:url value="/logout" />">
+                        <i class="fas fa-sign-out-alt"></i> 
+                        </a>
+                        <span class="label label-success">${sessionScope.name}</span>
+                                
+                    </c:if>
+                    <c:if test="${sessionScope.username==null }">
+                    	<a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
+                    	</a>
+                    	<a class="nav-icon position-relative text-decoration-none" href="<c:url value="/card" />">
+                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+						<span id="cnt" class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+               				${card.count}
+               			</span>                    	</a>
+                    	<a class="nav-icon position-relative text-decoration-none" href="<c:url value="/login" />">
+                        <i class="fa fa-key" aria-hidden="true"></i> 
+                        </a>
+                    </c:if>
+                                      
+                    
+                    
                 </div>
             </div>
         </div>

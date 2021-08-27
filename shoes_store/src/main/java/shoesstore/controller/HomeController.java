@@ -21,10 +21,7 @@ public class HomeController {
 	public String card() {
 		return "card";
 	}
-	@GetMapping("/admin/login")
-	public String login() {
-		return "auth/login";
-	}
+	
 	@GetMapping("/admin")
 	public String admin() {
 		return "admin";

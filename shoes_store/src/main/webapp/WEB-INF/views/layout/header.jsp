@@ -23,9 +23,9 @@
 						</a>
 						<div class="dropdown-menu dropdown-menu-right profile-notification">
 							<div class="pro-head">
-								<img src="<%=request.getContextPath() %>/resources/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
-								<span>John Doe</span>
-								<a href="auth-signin.html" class="dud-logout" title="Logout">
+								<img src="data:image/jpeg;base64,${sessionScope.image}" class="img-radius" alt="User-Profile-Image">
+								<span>${sessionScope.name }</span>
+								<a href="<c:url value="/logout" />" class="dud-logout" title="Logout"/>
 									<i class="feather icon-log-out"></i>
 								</a>
 							</div>
