@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,39 +31,41 @@
                     <i class="fa fa-key" aria-hidden="true"></i>
                 </div>
                 <div class="col-lg-12 login-title">
-                    ADMIN PANEL
+                    CUSTOMER LOGIN
                 </div>
 
                 <div class="col-lg-12 login-form">
                     <div class="col-lg-12 login-form">
-                        <form>
+                        <form:form method="post" modelAttribute="account" action="login" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label class="form-control-label">USERNAME</label>
-                                <input type="email" id="emails" class="form-control" required>
-                            </div>
+								<form:input path="email" class="form-control" id="emails" placeholder="Enter Email" />                            </div>
                             <div class="form-group">
                                 <label class="form-control-label">PASSWORD</label>
-                                <input type="password" class="form-control" required>
+                                <form:input path="password" type="password" class="form-control" id="passwords" placeholder="Enter Password" />                            </div>
                             </div>
 
                             <div class="col-lg-12 loginbttm">
                                 <div class="col-lg-6 login-btm login-text">
                                     <!-- Error Message -->
+                                    <label>${message }</label>
                                 </div>
                                 <div class="col-lg-6 login-btm login-button">
-                                    <button type="submit" class="btn btn-outline-primary">LOGIN</button>
+                                	<a href="<c:url value="/" />" class="btn btn-outline-success" role="button">HOME</a>
+                                    <button type="submit" class="btn btn-outline-primary" value="login">SINGIN</button>
+                                    <a href="<c:url value="/" />" class="btn btn-outline-info" role="button">REGISTER</a>
                                 </div>
                             </div>
-                        </form>
+                        </form:form>
+                        
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-2"></div>
             </div>
         </div>
-
-
-
-
+         </div>
 
 </body>
+<script src="<%=request.getContextPath() %>/resources/js/products/validate-form.js"></script>
+
 </html>
