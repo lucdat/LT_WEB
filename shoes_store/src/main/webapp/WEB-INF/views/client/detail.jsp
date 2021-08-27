@@ -27,114 +27,22 @@
             <div class="row">
                 <div class="col-lg-5 mt-5">
                     <div class="card mb-3">
-                        <img class="card-img img-fluid" src="<c:url value="resources/assets/img/product_single_10.jpg" />" alt="Card image cap" id="product-detail">
+                    	<img  height="500px" class="card-img " src="data:image/jpeg;base64,${product.image}">
                     </div>
-                    <div class="row">
-                        <!--Start Controls-->
-                        <div class="col-1 align-self-center">
-                            <a href="#multi-item-example" role="button" data-bs-slide="prev">
-                                <i class="text-dark fas fa-chevron-left"></i>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </div>
-                        <!--End Controls-->
-                        <!--Start Carousel Wrapper-->
-                        <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
-                            <!--Start Slides-->
-                            <div class="carousel-inner product-links-wap" role="listbox">
-
-                                <!--First slide-->
-                                <div class="carousel-item active">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img img-fluid" src="<c:url value="resources/assets/img/product_single_01.jpg" />" alt="Product Image 1">
-                                            </a>
-                                        </div>
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img img-fluid" src="<c:url value="resources/assets/img/product_single_02.jpg" />" alt="Product Image 2">
-                                            </a>
-                                        </div>
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img img-fluid" src="<c:url value="resources/assets/img/product_single_03.jpg" />" alt="Product Image 3">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/.First slide-->
-
-                                <!--Second slide-->
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img img-fluid" src="<c:url value="resources/assets/img/product_single_04.jpg" />" alt="Product Image 4">
-                                            </a>
-                                        </div>
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img img-fluid" src="<c:url value="resources/assets/img/product_single_05.jpg" />" alt="Product Image 5">
-                                            </a>
-                                        </div>
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img img-fluid" src="<c:url value="resources/assets/img/product_single_06.jpg" />" alt="Product Image 6">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/.Second slide-->
-
-                                <!--Third slide-->
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img img-fluid" src="<c:url value="resources/assets/img/product_single_07.jpg" />" alt="Product Image 7">
-                                            </a>
-                                        </div>
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img img-fluid" src="<c:url value="resources/assets/img/product_single_08.jpg" />" alt="Product Image 8">
-                                            </a>
-                                        </div>
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img img-fluid" src="<c:url value="resources/assets/img/product_single_09.jpg" />" alt="Product Image 9">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/.Third slide-->
-                            </div>
-                            <!--End Slides-->
-                        </div>
-                        <!--End Carousel Wrapper-->
-                        <!--Start Controls-->
-                        <div class="col-1 align-self-center">
-                            <a href="#multi-item-example" role="button" data-bs-slide="next">
-                                <i class="text-dark fas fa-chevron-right"></i>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </div>
-                        <!--End Controls-->
-                    </div>
+                   
                 </div>
                 <!-- col end -->
                 <div class="col-lg-7 mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="h2">Active Wear</h1>
-                            <p class="h3 py-2">$25.00</p>
+                            <h1 class="h2">${product.name }</h1>
+                            <p class="h3 py-2">${product.price } VND</p>
                             <p class="py-2">
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-secondary"></i>
-                                <span class="list-inline-item text-dark">Rating 4.8 | 36 Comments</span>
                             </p>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
@@ -146,39 +54,34 @@
                             </ul>
 
                             <h6>Description:</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum convallis. Nunc sed orci a diam ultrices aliquet interdum quis nulla.</p>
+                            <p>${product.description }</p>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
                                     <h6>Avaliable Color :</h6>
                                 </li>
                                 <li class="list-inline-item">
-                                    <p class="text-muted"><strong>White / Black</strong></p>
+                                	<c:forEach var="detailProduct" items="${product.getImports()}" varStatus="loop">
+                                		<span class="text-muted"><strong>${detailProduct.getColor() } / </strong></span>
+                                	</c:forEach>
                                 </li>
                             </ul>
 
-                            <h6>Specification:</h6>
-                            <ul class="list-unstyled pb-3">
-                                <li>Lorem ipsum dolor sit</li>
-                                <li>Amet, consectetur</li>
-                                <li>Adipiscing elit,set</li>
-                                <li>Duis aute irure</li>
-                                <li>Ut enim ad minim</li>
-                                <li>Dolore magna aliqua</li>
-                                <li>Excepteur sint</li>
-                            </ul>
+                            
 
                             <form action="" method="GET">
                                 <input type="hidden" name="product-title" value="Activewear">
                                 <div class="row">
                                     <div class="col-auto">
                                         <ul class="list-inline pb-3">
-                                            <li class="list-inline-item">Size :
+                                        	<li class="list-inline-item">Size :
                                                 <input type="hidden" name="product-size" id="product-size" value="S">
                                             </li>
-                                            <li class="list-inline-item"><span class="btn btn-success btn-size">S</span></li>
-                                            <li class="list-inline-item"><span class="btn btn-success btn-size">M</span></li>
-                                            <li class="list-inline-item"><span class="btn btn-success btn-size">L</span></li>
-                                            <li class="list-inline-item"><span class="btn btn-success btn-size">XL</span></li>
+                                        	<c:forEach var="detailProduct" items="${product.getImports()}" varStatus="loop">
+                                        		<label class="form-check-label list-inline-item">
+											    	<input type="radio" class="form-check-input" name="optradio">${detailProduct.getSize() }
+											  </label>
+		                                		
+		                                	</c:forEach>
                                         </ul>
                                     </div>
                                     <div class="col-auto">
@@ -219,19 +122,21 @@
             </div>
             <div class="actionBox">
                 <ul class="commentList">
-                    <li>
-                        <div class="commenterImage">
-                          <img src="http://lorempixel.com/50/50/people/9" />
-                        </div>
-                        <div class="commentText">
-                            <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
-        
-                        </div>
-                    </li>
+                		<c:forEach var="feedback" items="${feedbacks}" varStatus="loop">
+                        	<li>
+		                        <div class="commenterImage">
+		                        	<img src="data:image/jpeg;base64,${feedback.getUser().getImage()}">
+		                        </div>
+		                        <div class="commentText">
+		                            <p class="">${feedback.content}.</p> <span class="date sub-text">${feedback.date}</span>
+		        
+		                        </div>
+		                    </li>       		
+		                 </c:forEach>
                 </ul>
-                <form class="form-inline cc" role="form" action="/cc">
+                <form class="form-inline cc" role="form"  method="post" action="post/${product.id }">
                     <div class="form-group justify-content-center">
-                        <input class="form-control" type="text" placeholder="Your comments" />
+                        <input class="form-control" type="text" placeholder="Your comments" name="content"  />
                     </div>
                     <div class="form-group">
                         <input type="submit"  class="btn btn-info" value="post"/>
