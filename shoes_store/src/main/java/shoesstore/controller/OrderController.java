@@ -61,7 +61,7 @@ public class OrderController {
 	}
 	@RequestMapping(value="update/{id}/quantity/{qty}",method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public Object update(@PathVariable("id") Integer id,
+	public Object update(@PathVariable("id") String id,
 			             @PathVariable("qty") int qty) {
 		card.update(id,qty);
 		Object[] info = {card.getCount(),card.getAmount()};
@@ -70,7 +70,7 @@ public class OrderController {
 	
 	@RequestMapping(value="remove/{id}",method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public Object remove(@PathVariable("id") Integer id) {
+	public Object remove(@PathVariable("id") String id) {
 		card.remove(id);
 		Object[] info = {card.getCount(),card.getAmount()};
 		return info;
@@ -103,6 +103,7 @@ public class OrderController {
 			productService.update(detail.getProduct());
 			orderService.update(order);
 		}
+		card.clear();
 		Object info = "Please check your mail!";
 		SimpleMailMessage message = new SimpleMailMessage();
 	    message.setFrom("shoesstore@gmail.com");
@@ -113,4 +114,5 @@ public class OrderController {
 	    mailSender.send(message);
 		return info;
 	}
+	
 }

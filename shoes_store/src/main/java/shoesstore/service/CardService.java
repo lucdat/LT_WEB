@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
@@ -13,12 +14,15 @@ import shoesstore.entities.Product;
 @SessionScope
 @Service
 public class CardService {
+	private final static Logger log = Logger.getLogger(CardService.class);
 	@Autowired
 	private ProductService<Product, Integer> productService;
-	Map<Integer, OrderDetails> map = new HashMap<Integer,OrderDetails>();
+	Map<String, OrderDetails> map = new HashMap<String,OrderDetails>();
 	
 	public void add(Integer id,int size,String color) {
-		OrderDetails details = map.get(id);
+		String key=color+size+id;
+		log.info(key);
+		OrderDetails details = map.get(key);
 		if(details==null) {
 			details = new OrderDetails();
 			Product p = productService.findById(Product.class, id);
@@ -26,14 +30,15 @@ public class CardService {
 			details.setSize(size);
 			details.setProduct(p);
 			details.setQuantity(1);
-			map.put(id, details);
+			map.put(key, details);
 		}else {
 			details.setQuantity(details.getQuantity()+1);
-			map.put(id, details);
+			map.put(key, details);
 		}
 	}
 	public void add(Integer id,int size,String color,int qty) {
-		OrderDetails details = map.get(id);
+		String key=color+size+id;
+		OrderDetails details = map.get(key);
 		if(details==null) {
 			details = new OrderDetails();
 			Product p = productService.findById(Product.class, id);
@@ -41,17 +46,17 @@ public class CardService {
 			details.setSize(size);
 			details.setProduct(p);
 			details.setQuantity(qty);
-			map.put(id, details);
+			map.put(key, details);
 		}else {
 			details.setQuantity(details.getQuantity()+1);
-			map.put(id, details);
+			map.put(key, details);
 		}
 	}
-	public void remove(Integer id) {
+	public void remove(String id) {
 		map.remove(id);
 	}
 	
-	public void update(Integer id,int qty) {
+	public void update(String id,int qty) {
 		OrderDetails orderDetails= map.get(id);
 		orderDetails.setQuantity(qty);
 		map.remove(id);

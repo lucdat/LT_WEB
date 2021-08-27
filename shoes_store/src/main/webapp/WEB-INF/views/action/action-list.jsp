@@ -35,4 +35,46 @@
 			</table>
 		</div>
 	</div>
+	<div class="row justify-content-center">
+  	<nav aria-label="Page navigation example justify-content-center">
+	  <ul class="pagination justify-content-center">
+	  <c:choose>
+		    <c:when test="${paging.indexPage >1}">
+		        <li class="page-item ">
+	      			<a class="page-link" href="<c:url value="/action/list/${paging.indexPage-1 }" />" tabindex="-1">Previous</a>
+	    		</li> 
+		    </c:when>    
+		    <c:otherwise>
+		        <li class="page-item disabled ">
+	      			<a class="page-link" href="#" tabindex="-1">Previous</a>
+	    		</li> 
+		    </c:otherwise>
+		</c:choose>
+	  
+	    <c:forEach var = "i" begin = "1" end ="${paging.getTotalPages() }">
+         <c:choose>
+		    <c:when test="${paging.indexPage== i}">
+		        <li class="page-item active disabled"><a class="page-link active" href="<c:url value="/action/list/${i }" />">${i }</a></li>
+		    </c:when>    
+		    <c:otherwise>
+		        <li class="page-item"><a class="page-link" href="<c:url value="/action/list/${i }" />">${i }</a></li>
+		    </c:otherwise>
+		</c:choose>
+         
+      </c:forEach>
+      <c:choose>
+		    <c:when test="${paging.indexPage <paging.getTotalPages()}">
+		        <li class="page-item ">
+	      			<a class="page-link" href="<c:url value="/action/list/${paging.indexPage +1}" />">Next</a>
+	    		</li> 
+		    </c:when>    
+		    <c:otherwise>
+		        <li class="page-item disabled ">
+	      			<a class="page-link" href="#">Next</a>
+	    		</li> 
+		    </c:otherwise>
+		</c:choose>
+	  </ul>
+	</nav>
+  </div>
 </div>

@@ -23,6 +23,8 @@
 				<c:forEach var="item" items="${sessionScope['scopedTarget.cardService'].items}">
 					<tr data-id="${item.product.id}"
 					    data-price="${item.product.price}"
+					    data-color="${item.color}"
+					    data-size="${item.size}"
 					    data-sale="${item.product.sale}">
 						<td class="col-sm-8 col-md-6">
 							<div class="media">
@@ -75,8 +77,10 @@ $(document).ready(function(){
 		var id = $(this).closest("tr").attr("data-id"); 
 		var price = $(this).closest("tr").attr("data-price"); 
 		var sale = $(this).closest("tr").attr("data-sale"); 
+		var color = $(this).closest("tr").attr("data-color"); 
+		var size = $(this).closest("tr").attr("data-size"); 
 		var qty = $(this).val();
-		var url = "/shoes_store/card/update/"+id+"/quantity/"+qty;
+		var url = "/shoes_store/card/update/"+color+size+id+"/quantity/"+qty;
 		$.ajax({
 			url:url,
 			type: "GET",
@@ -89,8 +93,10 @@ $(document).ready(function(){
 		$(this).closest("tr").find("td.total").html(totalPrice);
 	 });
 	 $(".btn-card-remove").click(function(){
-		 var id = $(this).closest("tr").attr("data-id"); 
-		 var url = "/shoes_store/card/remove/"+id;
+		 var id = $(this).closest("tr").attr("data-id");
+		 var color = $(this).closest("tr").attr("data-color"); 
+		 var size = $(this).closest("tr").attr("data-size"); 
+		 var url = "/shoes_store/card/remove/"+color+size+id;
 		 $.ajax({
 				url:url,
 				type: "GET",

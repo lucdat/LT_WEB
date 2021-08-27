@@ -96,4 +96,7 @@
     <definition name="admin" extends="layout">
     <put-attribute name="body" value="/WEB-INF/views/index.jsp" />
   </definition>
+  <definition name="order-list" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/order/order-list.jsp" />
+  </definition>
 </tiles-definitions>

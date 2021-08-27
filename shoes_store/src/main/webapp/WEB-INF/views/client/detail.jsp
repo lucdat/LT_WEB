@@ -185,8 +185,8 @@
 $(document).ready(function(){
 	 $(".add-to-card").click(function(){
 		 var id = $(this).closest("div").attr("data-id"); 
-		 var color =  $("div[data-id]").find("input.product-color").val();
-		 var size =  $("div[data-id]").find("input.product-size").val();
+		 var color =  $("div[data-id]").find("input[name='color']:checked").val();
+		 var size =  $("div[data-id]").find("input[name='size']:checked").val();
 		 var url = "/shoes_store/card/add/"+id+"/size/"+size+"/color/"+color;
 		 $.ajax({
 				url:url,
@@ -200,8 +200,8 @@ $(document).ready(function(){
 	 });
 	 $(".add-to-card-relate").click(function(){
 		 var id = $(this).closest("div").attr("data-id"); 
-		 var color =  $("div[data-relate]").find("input.product-color").val();
-		 var size =  $("div[data-relate]").find("input.product-size").val();
+		 var color =  $("div[data-relate]").find("input[name='color']:checked").val();
+		 var size =  $("div[data-relate]").find("input[name='size']:checked").val();
 		 var url = "/shoes_store/card/add/"+id+"/size/"+size+"/color/"+color;
 		 $.ajax({
 				url:url,

@@ -249,8 +249,8 @@
 $(document).ready(function(){
 	 $(".add-to-card").click(function(){
 		 var id = $(this).closest("div").attr("data-id"); 
-		 var color =  $("div[data-find]").find("input.product-color").val();
-		 var size =  $("div[data-find]").find("input.product-size").val();
+		 var color =  $("div[data-find]").find("input[name='color']:checked").val();
+		 var size =  $("div[data-find]").find("input[name='size']:checked").val();
 		 var url = "/shoes_store/card/add/"+id+"/size/"+size+"/color/"+color;
 		 $.ajax({
 				url:url,
@@ -258,7 +258,7 @@ $(document).ready(function(){
 				success: function( response ){
 					$("#amt").html(response[1]);
 					$("#cnt").html(response[0]);
-					alert("Dã thêm vào giỏ hàng");
+					alert("Đã thêm vào giỏ hàng");
 				}
 		});
 	 });
