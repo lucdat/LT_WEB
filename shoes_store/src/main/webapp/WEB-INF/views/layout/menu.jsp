@@ -42,7 +42,7 @@
 								class="">Quản lí product</a></li>
 						</ul>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="<%=request.getContextPath() %>//user/list"
+							<li class=""><a href="<%=request.getContextPath() %>/invoice/"
 								class="">Quản lí invoice</a></li>
 						</ul>
 						<ul class="pcoded-submenu">

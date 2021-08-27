@@ -5,6 +5,7 @@ import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,13 +40,17 @@ public class ProductController {
 	}
 
 	@GetMapping("list/{indexPage}")
-	public String findAll(@PathVariable("indexPage") int indexPage, Model model) {
-		Paging paging = new Paging(indexPage);
-		List<Product> products = productDao.findAll(paging);
-		model.addAttribute("list", products);
-		model.addAttribute("paging", paging);
-		System.out.println(paging);
-		return "product-list";
+	public String findAll(@PathVariable("indexPage") int indexPage, Model model, HttpSession session) {
+		while(session.getAttribute("usernameAdmin") != null) {
+			Paging paging = new Paging(indexPage);
+			List<Product> products = productDao.findAll(paging);
+			model.addAttribute("list", products);
+			model.addAttribute("paging", paging);
+			System.out.println(paging);
+			return "product-list";
+		}
+		return "redirect:/loginadmin";
+		
 	}
 
 	@GetMapping("add")

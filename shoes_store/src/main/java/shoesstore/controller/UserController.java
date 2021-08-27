@@ -6,6 +6,8 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -54,12 +56,16 @@ public class UserController {
 	}
 
 	@GetMapping("list/{indexPage}")
-	public String findAll(@PathVariable("indexPage") int indexPage, Model model) {
-		Paging paging = new Paging(indexPage);
-		List<User> users = userService.findAll(paging);
-		model.addAttribute("users", users);
-		model.addAttribute("paging", paging);
-		return "user-list";
+	public String findAll(@PathVariable("indexPage") int indexPage, Model model, HttpSession session) {
+		while(session.getAttribute("usernameAdmin") != null) {
+			Paging paging = new Paging(indexPage);
+			List<User> users = userService.findAll(paging);
+			model.addAttribute("users", users);
+			model.addAttribute("paging", paging);
+			return "user-list";
+		}
+		return "redirect:/loginadmin";
+		
 	}
 
 	@GetMapping("add")

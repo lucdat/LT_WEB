@@ -2,6 +2,8 @@ package shoesstore.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +28,18 @@ public class CategoryController {
 		return "redirect:list/1";
 	}
 	@GetMapping("list/{indexPage}")
-	public String findAll(@PathVariable("indexPage") int indexPage, Model model) {
-		Paging paging = new Paging(indexPage);
-		List<Category> categories = categoryDao.findAll(paging);
-		model.addAttribute("listCategory", categories);
-		model.addAttribute("paging", paging);
-		System.out.println(paging);
-		return "category-list";
+	public String findAll(@PathVariable("indexPage") int indexPage, Model model, HttpSession session) {
+		while(session.getAttribute("usernameAdmin") != null) {
+			Paging paging = new Paging(indexPage);
+			List<Category> categories = categoryDao.findAll(paging);
+			model.addAttribute("listCategory", categories);
+			model.addAttribute("paging", paging);
+			System.out.println(paging);
+			return "category-list";
+		}
+		return "redirect:/loginadmin";
+		
+		
 	}
 	@GetMapping("add")
 	public String showFormAddCategory(Model model) {

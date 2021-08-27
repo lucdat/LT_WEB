@@ -32,7 +32,7 @@ public class LoginController {
 	@GetMapping("/login")
 	public String Formlogin(Model model, HttpSession session) {
 		model.addAttribute("account", new User());
-		session.setAttribute("username", null);
+		session.setAttribute("customerC", null);
 		return "auth/login";
 	}
 	@PostMapping("/login")
@@ -41,11 +41,7 @@ public class LoginController {
 		
 		if(user!=null && !user.isEmpty()) {
 			if(user.get(0).getPassword().equals(account.getPassword())) {
-				session1.setAttribute("id", user.get(0).getId());
-				session1.setAttribute("usernameC", user.get(0).getEmail());
-				session1.setAttribute("nameC", user.get(0).getName());
-				session1.setAttribute("imageC", user.get(0).getImage());
-				session1.setAttribute("roleC", user.get(0).getRole().getName());
+				session1.setAttribute("customerC", user.get(0));
 				if(user.get(0).getRole().getName().equals("CUSTOMER")) {
 					return "redirect:/";
 				}
@@ -70,20 +66,23 @@ public class LoginController {
 	
 	@GetMapping("/loginadmin")
 	public String FormLoginAdmin(Model model, HttpSession session) {
-		model.addAttribute("accountAdmin", new User());
-		session.setAttribute("usernameAdmin", null);
-		return "auth/loginadmin";
+		if(session.getAttribute("usernameAdmin") == null) {
+			model.addAttribute("accountAdmin", new User());
+			session.setAttribute("usernameAdmin", null);
+			return "auth/loginadmin";
+		}
+		else {
+			return "redirect:admin";
+		}
+		
 	}
 	@PostMapping("/loginadmin")
 	public String loginAdmin(@ModelAttribute("accountAdmin") User account, Model model, HttpSession session) {
-		List<User> user = userDao.findByProperty("email", account.getEmail());
 		
+		List<User> user = userDao.findByProperty("email", account.getEmail());
 		if(user!=null && !user.isEmpty()) {
 			if(user.get(0).getPassword().equals(account.getPassword())) {
-				session.setAttribute("username", user.get(0).getEmail());
-				session.setAttribute("name", user.get(0).getName());
-				session.setAttribute("image", user.get(0).getImage());
-				session.setAttribute("role", user.get(0).getRole().getName());
+				session.setAttribute("usernameAdmin", user.get(0));
 				if(user.get(0).getRole().getName().equals("ADMIN")) {
 					return "redirect:admin";
 				}
