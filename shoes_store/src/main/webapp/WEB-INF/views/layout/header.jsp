@@ -25,7 +25,7 @@
 							<div class="pro-head">
 								<img src="data:image/jpeg;base64,${sessionScope.image}" class="img-radius" alt="User-Profile-Image">
 								<span>${sessionScope.name }</span>
-								<a href="<c:url value="/logout" />" class="dud-logout" title="Logout"/>
+								<a href="<c:url value="/logoutadmin" />" class="dud-logout" title="Logout"/>
 									<i class="feather icon-log-out"></i>
 								</a>
 							</div>

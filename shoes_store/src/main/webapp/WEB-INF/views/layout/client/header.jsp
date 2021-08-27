@@ -43,7 +43,7 @@
                     </div>
                     
                     
-                    <c:if test="${sessionScope.username!=null }">
+                    <c:if test="${sessionScope.usernameC!=null }">
                     	<a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     	</a>
@@ -55,10 +55,10 @@
                     	<a class="nav-icon position-relative text-decoration-none" href="<c:url value="/logout" />">
                         <i class="fas fa-sign-out-alt"></i> 
                         </a>
-                        <span class="label label-success">${sessionScope.name}</span>
+                        <span class="label label-success">${sessionScope.nameC}</span>
                                 
                     </c:if>
-                    <c:if test="${sessionScope.username==null }">
+                    <c:if test="${sessionScope.usernameC==null }">
                     	<a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     	</a>
