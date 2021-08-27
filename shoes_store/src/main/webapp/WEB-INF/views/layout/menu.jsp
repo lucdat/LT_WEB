@@ -20,7 +20,7 @@
 				<li class="nav-item pcoded-hasmenu">
 					<p class="nav-link">
 						<span class="pcoded-micon"> <i class="feather icon-box">
-						</i></span> <span class="pcoded-mtext">Quản hệ thống</span>
+						</i></span> <span class="pcoded-mtext" style="cursor:pointer">Quản hệ thống</span>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="<%=request.getContextPath() %>/user/list"
 								class="">Quản lí user</a></li>
@@ -34,11 +34,11 @@
 								class="">Quản lí action</a></li>
 						</ul>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="<%=request.getContextPath() %>//user/list"
+							<li class=""><a href="<%=request.getContextPath() %>/category/"
 								class="">Quản lí category</a></li>
 						</ul>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="<%=request.getContextPath() %>//user/list"
+							<li class=""><a href="<%=request.getContextPath() %>/product"
 								class="">Quản lí product</a></li>
 						</ul>
 						<ul class="pcoded-submenu">
@@ -52,10 +52,6 @@
 						<ul class="pcoded-submenu">
 							<li class=""><a href="<%=request.getContextPath() %>//user/list"
 								class="">Quản lí orderDetails</a></li>
-						</ul>
-						<ul class="pcoded-submenu">
-							<li class=""><a href="<%=request.getContextPath() %>//user/list"
-								class="">Quản lí feedback</a></li>
 						</ul>
 				</li>
 			</ul>

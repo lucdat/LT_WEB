@@ -17,11 +17,6 @@ public class HomeController {
 	public String contact() {
 		return "contact";
 	}
-	
-	@GetMapping("/detail")
-	public String detail() {
-		return "detail";
-	}
 	@GetMapping("/card")
 	public String card() {
 		return "card";
@@ -29,5 +24,9 @@ public class HomeController {
 	@GetMapping("/admin/login")
 	public String login() {
 		return "auth/login";
+	}
+	@GetMapping("/admin")
+	public String admin() {
+		return "admin";
 	}
 }

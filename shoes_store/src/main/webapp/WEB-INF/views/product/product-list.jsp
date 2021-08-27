@@ -35,7 +35,7 @@
 		            
 		            <td class="text-center">
 		            
-		              <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+		            	<a href="<c:url value="/manager-feeback/${product.id }" />" class="btn btn-primary" role="button"><i class="far fa-eye"></i></a>
 		              <a href="<c:url value="/product/edit/${product.id }" />" class="btn btn-success" role="button"><i class="fas fa-edit"></i></a>
 		               <a href="<c:url value="/product/delete/${product.id }" />" class="btn btn-danger" role="button"><i class="far fa-trash-alt"></i></a>
 		          

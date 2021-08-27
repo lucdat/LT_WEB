@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <a href="<c:url value="/detail" />" class="h3 text-decoration-none">${product.name }</a>
+                                <a href="<c:url value="/detail/${product.id }" />" class="h3 text-decoration-none">${product.name }</a>
                                 <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                                     <li>M/L/X/XL</li>
                                     <li class="pt-2">
