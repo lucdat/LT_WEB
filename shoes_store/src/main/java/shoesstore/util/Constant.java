@@ -1,8 +1,6 @@
 package shoesstore.util;
 
-import java.util.List;
 
-import shoesstore.entities.Action;
 
 public class Constant {
 	public final static String  USER_INFO = "userInfo";

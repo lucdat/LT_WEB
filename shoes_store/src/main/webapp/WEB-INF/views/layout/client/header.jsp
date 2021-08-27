@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
-
+<c:set var="card" value="${sessionScope['scopedTarget.cardService']}"/>
 <header >
 	<nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
@@ -46,7 +46,9 @@
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="<c:url value="/card" />">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
+                        <span id="cnt" class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+               				${card.count}
+               			</span>
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="<c:url value="/login" />">
                         <i class="fa fa-key" aria-hidden="true"></i>
@@ -54,7 +56,6 @@
                     </a>
                 </div>
             </div>
-
         </div>
     </nav>
 </header>

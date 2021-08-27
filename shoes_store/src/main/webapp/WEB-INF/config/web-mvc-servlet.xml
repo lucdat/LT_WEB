@@ -14,13 +14,6 @@
 	<mvc:resources location="/static/"
 		mapping="/resources/**" cache-period="31556926" />
 	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="order" value="1" />
-		<property name="prefix" value="/WEB-INF/views/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-
-	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:jdbc.properties" />
 	</bean>
@@ -66,7 +59,20 @@
 	</bean>
 	<mvc:default-servlet-handler />
 	<bean id="messageSource"
-        class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basename" value="/message/message" />
-    </bean>
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="/message/message" />
+	</bean>
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="username" value="storeshoes45@gmail.com" />
+		<property name="password" value="shoes12345" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.port">587</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
 </beans>

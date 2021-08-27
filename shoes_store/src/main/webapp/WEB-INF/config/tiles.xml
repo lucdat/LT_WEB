@@ -87,4 +87,7 @@
   <definition name="card" extends="client">
     <put-attribute name="body" value="/WEB-INF/views/client/card.jsp"/>
   </definition>
+  <definition name="checkout-form" extends="client">
+    <put-attribute name="body" value="/WEB-INF/views/client/checkout-form.jsp"/>
+  </definition>
 </tiles-definitions>

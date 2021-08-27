@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
  <!-- Modal -->
     <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -82,11 +83,11 @@
                         <div class="card mb-4 product-wap rounded-0">
                             <div class="card rounded-0">
                             	<img class="card-img rounded-0 img-fluid" src="data:image/jpeg;base64,${product.image}">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                <div  data-id="${product.id}"  class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul class="list-unstyled">
-                                        <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="far fa-eye"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
+                                        <li> <button class="btn btn-success text-white like" ><i class="far fa-heart"></i></button></li>
+                                        <li> <button class="btn btn-success text-white mt-2 detail" ><i class="far fa-eye"></i></button></li>
+                                        <li> <button  class="btn btn-success text-white mt-2 add-to-card" ><i class="fas fa-cart-plus"></i></button></li>
                                     </ul>
                                 </div>
                             </div>
@@ -244,3 +245,25 @@
         </div>
     </section>
     <!--End Brands-->
+<script type="text/javascript">
+$(document).ready(function(){
+	 $(".add-to-card").click(function(){
+		 var id = $(this).closest("div").attr("data-id"); 
+		 var url = "/shoes_store/card/add/"+id+"/size/41/color/white";
+		 $.ajax({
+				url:url,
+				type: "GET",
+				success: function( response ){
+					$("#amt").html(response[1]);
+					$("#cnt").html(response[0]);
+					alert("Dã thêm vào giỏ hàng");
+				}
+		});
+	 });
+	 $(".detail").click(function(){
+		 var id = $(this).closest("div").attr("data-id"); 
+		 var url = "/shoes_store/shop/detail/"+id;
+		 top.location.href=url;
+	 });
+});
+</script>

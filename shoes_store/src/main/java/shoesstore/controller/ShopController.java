@@ -1,5 +1,6 @@
 package shoesstore.controller;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import shoesstore.dao.CategoryDao;
 import shoesstore.dao.ProductDao;
 import shoesstore.entities.Category;
+import shoesstore.entities.Import;
 import shoesstore.entities.Paging;
 import shoesstore.entities.Product;
 
@@ -62,5 +64,21 @@ public class ShopController {
 		model.addAttribute("list", products);
 		model.addAttribute("id", id);
 		return "shop";
+	}
+	@GetMapping("detail/{id}")
+	public String productDetails(@PathVariable("id") int  id,Model model) {
+		Product product = productDao.findById(Product.class, id);
+		List<Product> products = productDao.findByProperty("category.id",product.getCategory().getId());
+		Set<Integer> size = new HashSet<Integer>();
+		Set<String> color = new HashSet<String>();
+		for(Import import1:product.getImports()) {
+			size.add(import1.getSize());
+			color.add(import1.getColor());
+		}
+		model.addAttribute("product", product);
+		model.addAttribute("products", products);
+		model.addAttribute("size",size);
+		model.addAttribute("color",color);
+		return "detail";
 	}
 }

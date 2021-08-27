@@ -3,6 +3,7 @@ package shoesstore.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class User {
 	private String email;
 	@Column(nullable = false,length =10)
 	private String phone;
-	@Column(nullable = false,length = 100)
+	@Column(length = 100)
 	private String password;
 	@Lob
 	@Column(columnDefinition = "MEDIUMBLOB")
@@ -40,9 +41,9 @@ public class User {
 	@JoinColumn(name = "role_id",referencedColumnName = "id",nullable = true)
 	private Role role;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<FeedBack> feedBacks = new HashSet<FeedBack>();
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Orders> orders = new HashSet<Orders>();
 	
 	

@@ -1,143 +1,113 @@
-<div class="container justify-content-center d-flex" >
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="shoesstore.entities.OrderDetails" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<c:set var="card" value="${sessionScope['scopedTarget.cardService']}"/>
+<div class="container justify-content-center d-flex">
 	<div class="col-sm-12 col-md-10 col-md-offset-1 justify-content-center">
-    <table class="table table-hover justify-content-center">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Authorized</th>
-                <th>Quantity</th>
-                <th class="text-center">Price</th>
-                <th class="text-center">Total</th>
-                <th> </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="col-sm-8 col-md-6">
-                    <div class="media">
-                        <a class="thumbnail pull-left" href="#"> <img class="media-object"
-                                src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png"
-                                style="width: 72px; height: 72px;"> </a>
-                        <div class="media-body">
-                            <h4 class="media-heading"><a href="#">Package</a></h4>
-                            <h5 class="media-heading"> by <a href="#">Brand name</a></h5>
-                            <span>Status: </span><span class="text-warning"><strong>In Stock</strong></span>
-                        </div>
-                    </div>
-                </td>
-                <td class="col-md-1 text-left"><strong class="label label-danger">None</strong></td>
-                <td class="col-sm-1 col-md-1" style="text-align: center">
-                    <input type="email" class="form-control" id="exampleInputEmail1" value="3">
-                </td>
-                <td class="col-sm-1 col-md-1 text-center"><strong>$9.99</strong></td>
-                <td class="col-sm-1 col-md-1 text-center"><strong>$99.99</strong></td>
-                <td class="col-sm-1 col-md-1">
-                    <button type="button" class="btn btn-danger">
-                        <span class="fa fa-remove"></span> Remove
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-6">
-                    <div class="media">
-                        <a class="thumbnail pull-left " href="#"> <img class="media-object "
-                                src="https://adc3ef35f321fe6e725a-fb8aac3b3bf42afe824f73b606f0aa4c.ssl.cf1.rackcdn.com/tenantlogos/28859.png"
-                                style="width: 72px; height: 72px;"> </a>
-                        <div class="media-body">
-                            <h4 class="media-heading"><a href="#">Auto</a></h4>
-                            <h5 class="media-heading"> by <a href="#">Hertz</a></h5>
-                            <span>Status: </span><span class="text-success"><strong>Lorem ipsum in 2 - 3
-                                    weeks</strong></span>
-                        </div>
-                    </div>
-                </td>
-                <td class="col-md-1 text-left"><strong class="label label-success ">Authorized</strong></td>
-                <td class="col-md-1" style="text-align: center">
-                    <input type="email" class="form-control" id="exampleInputEmail1" value="2">
-                </td>
-                <td class="col-md-1 text-center"><strong>$9.99</strong></td>
-                <td class="col-md-1 text-center"><strong>$9.98</strong></td>
-                <td class="col-md-1">
-                    <button type="button" class="btn btn-danger">
-                        <span class="fa fa-remove"></span> Remove
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-6">
-                    <div class="media">
-                        <a class="thumbnail pull-left" href="#"> <img class="media-object"
-                                src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQFLUKa1_4ANg6LBvqpz_zcCnjzVFxXk0JlSgzJnp8W9uqL0VioOGUWfw"
-                                style="width: 72px; height: 72px;"> </a>
-                        <div class="media-body">
-                            <h4 class="media-heading"><a href="#">Flight</a></h4>
-                            <h5 class="media-heading"> by <a href="#">Alitalia</a></h5>
-                            <span>Status: </span><span class="text-success"><strong>Lorem ipsum in 2 - 3
-                                    weeks</strong></span>
-                        </div>
-                    </div>
-                </td>
-                <td class="col-md-1 text-left"><strong class="label label-success ">Authorized</strong></td>
-                <td class="col-md-1" style="text-align: center">
-                    <input type="email" class="form-control" id="exampleInputEmail1" value="2">
-                </td>
-                <td class="col-md-1 text-center"><strong>$999.99</strong></td>
-                <td class="col-md-1 text-center"><strong>$999.98</strong></td>
-                <td class="col-md-1">
-                    <button type="button" class="btn btn-danger">
-                        <span class="fa fa-remove"></span> Remove
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td> </td>
-                <td> </td>
-                <td> </td>
-                <td>
-                    <h5>Subtotal</h5>
-                </td>
-                <td class="text-right">
-                    <h5><strong>$999.99</strong></h5>
-                </td>
-            </tr>
-            <tr>
-                <td> </td>
-                <td> </td>
-                <td> </td>
-                <td>
-                    <h5>Estimated shipping</h5>
-                </td>
-                <td class="text-right">
-                    <h5><strong>$9.999.99</strong></h5>
-                </td>
-            </tr>
-            <tr>
-                <td> </td>
-                <td> </td>
-                <td> </td>
-                <td>
-                    <h3>Total</h3>
-                </td>
-                <td class="text-right">
-                    <h3><strong>$9.999.99</strong></h3>
-                </td>
-            </tr>
-            <tr>
-                <td> </td>
-                <td> </td>
-                <td> </td>
-                <td>
-                    <button type="button" class="btn btn-default">
-                        <span class="fa fa-shopping-cart"></span> Continue Shopping
-                    </button>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-success">
-                        Checkout <span class="fa fa-play"></span>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+		<table class="table table-hover justify-content-center">
+			<thead>
+				<tr>
+					<th>Product</th>
+					<th>Size</th>
+					<th>Color</th>
+					<th>Quantity</th>
+					<th class="text-center">Price</th>
+					<th class="text-center">Total</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="item" items="${sessionScope['scopedTarget.cardService'].items}">
+					<tr data-id="${item.product.id}"
+					    data-price="${item.product.price}"
+					    data-sale="${item.product.sale}">
+						<td class="col-sm-8 col-md-6">
+							<div class="media">
+								<a class="thumbnail pull-left" href="#"> <img
+									class="media-object"
+									src="data:image/jpeg;base64,${item.product.image}"
+									style="width: 72px; height: 72px;">
+								</a>
+							</div>
+						</td>
+						<td class="col-sm-1 col-md-1 text-center"><strong>${item.size}</strong></td>
+						<td class="col-sm-1 col-md-1 text-center"><strong>${item.color}</strong></td>
+						<td class="col-sm-1 col-md-1" style="text-align: center">
+							<input class="form-control" type="number" min="1"
+									value="${item.quantity}" >
+						</td>
+						<td class="col-sm-1 col-md-1 text-center"><strong>${item.product.price*(1-item.product.sale)}VND</strong></td>
+						<td class= "total col-sm-1 col-md-1 text-center">
+								${item.totalPrice}VND
+						</td>
+						<td class="col-sm-1 col-md-1">
+							<button type="button" class="btn btn-danger btn-card-remove">
+								<span class="fa fa-remove"></span> Remove
+							</button>
+						</td>
+					</tr>
+				</c:forEach>
+				<tr >
+					<td></td>
+					<td></td>
+					<td>
+						<button type="button" class="btn btn-default continue">
+							<span class="fa fa-shopping-cart"></span> Continue Shopping
+						</button>
+					</td>
+					<td><b id="amt">${card.amount}</b></td>
+					<td>
+						<button type="button" class="btn btn-success check-out">
+							Checkout <span class="fa fa-play"></span>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
-</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	 $("tr[data-id] input").on("input",function(){
+		var id = $(this).closest("tr").attr("data-id"); 
+		var price = $(this).closest("tr").attr("data-price"); 
+		var sale = $(this).closest("tr").attr("data-sale"); 
+		var qty = $(this).val();
+		var url = "/shoes_store/card/update/"+id+"/quantity/"+qty;
+		$.ajax({
+			url:url,
+			type: "GET",
+			success: function( response ){
+				$("#amt").html(response[1]);
+				$("#cnt").html(response[0]);
+			}
+		});
+		var totalPrice = price*(1-sale)*qty;
+		$(this).closest("tr").find("td.total").html(totalPrice);
+	 });
+	 $(".btn-card-remove").click(function(){
+		 var id = $(this).closest("tr").attr("data-id"); 
+		 var url = "/shoes_store/card/remove/"+id;
+		 $.ajax({
+				url:url,
+				type: "GET",
+				success: function( response ){
+					$("#amt").html(response[1]);
+					$("#cnt").html(response[0]);
+				}
+		});
+		$(this).closest("tr").remove();
+	 });
+	 $(".check-out").click(function(){
+		 var url = "/shoes_store/card/checkout";
+		 top.location.href=url;
+	 });
+	 $(".continue").click(function(){
+		 var url = "/shoes_store/shop";
+		 top.location.href=url;
+	 });
+});
+</script>

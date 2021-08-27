@@ -14,7 +14,11 @@ public class OrderDetails {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	@Column(nullable = false)
-	private int quantity; 
+	private int quantity;
+	@Column(nullable = false)
+	private int size;
+	@Column(nullable = false,length = 30)
+	private String color;
 	
 	@ManyToOne
 	@JoinColumn(name = "product_id",referencedColumnName = "id",nullable = true)
@@ -65,4 +69,23 @@ public class OrderDetails {
 		this.order = order;
 	}
 	
+	public Double getTotalPrice() {
+		return this.getProduct().getPrice()*(1- this.getProduct().getSale()) * this.getQuantity();
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
 }

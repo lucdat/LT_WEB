@@ -28,7 +28,7 @@ public class Orders {
 	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id",nullable = true,insertable = false,updatable = false)
+	@JoinColumn(name = "user_id",referencedColumnName = "id",nullable = true)
 	private User user;
 	
 	public Orders() {
