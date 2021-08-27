@@ -22,6 +22,8 @@ import shoesstore.entities.User;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 
 @Controller
 @RequestMapping("detail")
@@ -40,6 +42,8 @@ public class DetailController {
 		Set<FeedBack> lisFeedBacks = product.getFeedBacks();
 		model.addAttribute("product", product);
 		model.addAttribute("feedbacks", lisFeedBacks);
+		List<Product> products = productDao.findByProperty("category.id",product.getCategory().getId());
+		model.addAttribute("products", products);
 		return "detail";
 	}
 	

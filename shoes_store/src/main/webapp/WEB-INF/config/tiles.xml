@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+  <definition name="layout" template="/WEB-INF/views/layout/layout.jsp">
+    <put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+    <put-attribute name="menu" value="/WEB-INF/views/layout/menu.jsp" />
+    <put-attribute name="body" value="" />
+    <put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+  </definition>
+  
+  <definition name="client" template="/WEB-INF/views/layout/client/layout.jsp">
+    <put-attribute name="header" value="/WEB-INF/views/layout/client/header.jsp" />
+    <put-attribute name="menu" value="/WEB-INF/views/layout/client/menu.jsp" />
+    <put-attribute name="body" value="" />
+    <put-attribute name="footer" value="/WEB-INF/views/layout/client/footer.jsp" />
+  </definition>
+  
+  <definition name="index" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/index.jsp" />
+  </definition>
+  <definition name="product-form" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/product/product-form.jsp" />
+  </definition>
+  <definition name="category-form" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/category/category-form.jsp" />
+  </definition>
+  <definition name="category-list" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/category/category-list.jsp" />
+  </definition>
+    <definition name="product-list" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/product/product-list.jsp" />
+  </definition>
+  <definition name="invoice-list" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/invoice/invoice-list.jsp" />
+  </definition>
+  <definition name="invoice-form" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/invoice/invoice-form.jsp" />
+  </definition>
+  <definition name="invoice-details" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/invoice/invoice-details.jsp" />
+  </definition>
+   <definition name="user-list" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/user/user-list.jsp" />
+  </definition>
+  <definition name="user-form" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/user/user-form.jsp" />
+  </definition>
+   <definition name="user-update" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/user/user-update.jsp" />
+  </definition>
+  <definition name="role-list" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/role/role-list.jsp" />
+  </definition>
+  <definition name="role-form" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/role/role-form.jsp" />
+  </definition>
+  <definition name="role-update" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/role/role-update.jsp" />
+  </definition>
+  <definition name="action-list" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/action/action-list.jsp" />
+  </definition>
+  <definition name="action-form" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/action/action-form.jsp" />
+  </definition>
+   <definition name="action-update" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/action/action-update.jsp" />
+  </definition>
+  
+  <definition name="index" extends="client">
+    <put-attribute name="body" value="/WEB-INF/views/client/index.jsp"/>
+  </definition>
+  <definition name="about" extends="client">
+    <put-attribute name="body" value="/WEB-INF/views/client/about.jsp"/>
+  </definition>
+  <definition name="contact" extends="client">
+    <put-attribute name="body" value="/WEB-INF/views/client/contact.jsp"/>
+  </definition>
+  <definition name="shop" extends="client">
+    <put-attribute name="body" value="/WEB-INF/views/client/shop.jsp"/>
+  </definition>
+  <definition name="detail" extends="client">
+    <put-attribute name="body" value="/WEB-INF/views/client/detail.jsp"/>
+  </definition>
+  <definition name="card" extends="client">
+    <put-attribute name="body" value="/WEB-INF/views/client/card.jsp"/>
+  </definition>
+  <definition name="checkout-form" extends="client">
+    <put-attribute name="body" value="/WEB-INF/views/client/checkout-form.jsp"/>
+  </definition>
+</tiles-definitions>

@@ -79,8 +79,8 @@
                 <div class="row">
                   <!--   vong lap for  -->
                     <c:forEach var="product" items="${list}" varStatus="loop">
-		        		<div class="col-md-4">
-                        <div class="card mb-4 product-wap rounded-0">
+		        		<div class="col-md-4" >
+                        <div class="card mb-4 product-wap rounded-0" >
                             <div class="card rounded-0">
                             	<img class="card-img rounded-0 img-fluid" src="data:image/jpeg;base64,${product.image}">
                                 <div  data-id="${product.id}"  class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
@@ -91,26 +91,26 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <a href="<c:url value="/detail/${product.id }" />" class="h3 text-decoration-none">${product.name }</a>
-                                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                    <li>M/L/X/XL</li>
-                                    <li class="pt-2">
-                                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                                    </li>
-                                </ul>
-                                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                                    <li>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                    </li>
+                            <div class="card-body" data-find="${product.id }">
+                                <ul class="list-inline pb-3">
+                                        	<li class="list-inline-item">Size :
+                                                <input type="hidden" name="product-size" id="product-size" value="S">
+                                            </li>
+                                        	<c:forEach var="detailProduct" items="${product.getImports()}" varStatus="loop">
+                                        		<label class="form-check-label list-inline-item">
+											    	<input type="radio" class="form-check-input product-size" name="size" value="${detailProduct.getSize() }">${detailProduct.getSize() }
+											  </label>
+		                                		
+		                                	</c:forEach>
+                                 </ul>
+                                <ul class="list-inline pb-3">
+                                    <li class="list-inline-item">Color:
+                                	<c:forEach var="detailProduct" items="${product.getImports()}" varStatus="loop">
+                                		<span class="text-muted">
+                                			<input type="radio" class="form-check-input product-color" name="color" value="${detailProduct.getColor()}">${detailProduct.getColor()}
+                                	  </span>
+                                	</c:forEach>
+                                </li>
                                 </ul>
                                 <p class="text-center mb-0">${product.price }</p>
                             </div>
@@ -119,7 +119,7 @@
         			</c:forEach>
                    <!-- end for -->
                 </div>
-                <div div="row">
+                <div class="row">
                     <ul class="pagination pagination-lg justify-content-end">
                     	<c:forEach var = "i" begin = "1" end ="${paging.getTotalPages() }">
 					         <c:choose>
@@ -249,7 +249,9 @@
 $(document).ready(function(){
 	 $(".add-to-card").click(function(){
 		 var id = $(this).closest("div").attr("data-id"); 
-		 var url = "/shoes_store/card/add/"+id+"/size/41/color/white";
+		 var color =  $("div[data-find]").find("input.product-color").val();
+		 var size =  $("div[data-find]").find("input.product-size").val();
+		 var url = "/shoes_store/card/add/"+id+"/size/"+size+"/color/"+color;
 		 $.ajax({
 				url:url,
 				type: "GET",
@@ -262,7 +264,7 @@ $(document).ready(function(){
 	 });
 	 $(".detail").click(function(){
 		 var id = $(this).closest("div").attr("data-id"); 
-		 var url = "/shoes_store/shop/detail/"+id;
+		 var url = "/shoes_store/detail/"+id;
 		 top.location.href=url;
 	 });
 });
