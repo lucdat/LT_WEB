@@ -38,8 +38,8 @@
   <definition name="invoice-form" extends="layout">
     <put-attribute name="body" value="/WEB-INF/views/invoice/invoice-form.jsp" />
   </definition>
-  <definition name="invoice-details" extends="layout">
-    <put-attribute name="body" value="/WEB-INF/views/invoice/invoice-details.jsp" />
+  <definition name="invoice-import" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/views/invoice/invoice-import.jsp" />
   </definition>
    <definition name="user-list" extends="layout">
     <put-attribute name="body" value="/WEB-INF/views/user/user-list.jsp" />
