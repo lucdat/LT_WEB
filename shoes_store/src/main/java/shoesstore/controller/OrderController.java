@@ -1,11 +1,22 @@
 package shoesstore.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +33,7 @@ import shoesstore.service.OrderDetailService;
 import shoesstore.service.OrderService;
 import shoesstore.service.ProductService;
 import shoesstore.service.UserService;
+import shoesstore.validator.UserValidate;
 
 @Controller
 @RequestMapping("card")
@@ -77,34 +89,49 @@ public class OrderController {
 	}
 	
 	@GetMapping("checkout")
-	public String checkoutForm(Model model) {
-		model.addAttribute("user", new User());
-		model.addAttribute("url", "../card/checkout");
+	public String checkoutForm(Model model,HttpSession session) {
+		User user = (User)session.getAttribute("customerC");
+		if(user==null) {
+			model.addAttribute("user", new User());
+			model.addAttribute("url", "../card/checkout");
+		}else {
+			model.addAttribute("user",user);
+			model.addAttribute("url", "../card/checkout");
+		}
 		return "checkout-form";
 	}
 	
-	@RequestMapping(value="checkout",method = RequestMethod.POST, produces="application/json")
-	@ResponseBody
-	public Object checkout(@ModelAttribute("user") User user,@RequestParam("address")String address) {
-		userService.insert(user);
-		Orders order = new Orders();
-		order.setAddress(address);
-		order.setStatus(0);
-		order.setUser(user);
-		order.setSumPrice(card.getAmount());
-		orderService.insert(order);
-		user.getOrders().add(order);
-		userService.update(user);
+	@RequestMapping(value="checkout",method = RequestMethod.POST)
+	public String checkout(@ModelAttribute("user")@Valid User user,
+						   @RequestParam("address")String address,
+						   BindingResult result,
+						   HttpSession session) {
+		if(result.hasErrors()) {
+			return "redirect:../card/checkout";
+		}
+		Orders order = new Orders(card.getAmount(),0,address);
+		List<User> user2 = userService.findByProperty("email", user.getEmail());
+		if(user2==null || user2.isEmpty()) {
+			userService.insert(user);
+			order.setUser(user);
+			orderService.insert(order);
+			user.getOrders().add(order);
+			userService.update(user);
+		}else {
+			user2.get(0).setName(user.getName());
+			user2.get(0).setPhone(user.getPhone());
+			order.setUser(user2.get(0));
+			user2.get(0).getOrders().add(order);
+			orderService.insert(order);
+		}
 		for(OrderDetails detail:card.getItems()) {
 			order.getOrderDetails().add(detail);
 			detail.setOrder(order);
 			detail.getProduct().getOrderDetails().add(detail);
 			orderDetailService.insert(detail);
-			productService.update(detail.getProduct());
-			orderService.update(order);
 		}
 		card.clear();
-		Object info = "Please check your mail!";
+		session.setAttribute("message","Your order susscess!,Please check your mail!");
 		SimpleMailMessage message = new SimpleMailMessage();
 	    message.setFrom("shoesstore@gmail.com");
 	    message.setTo(user.getEmail());
@@ -112,7 +139,7 @@ public class OrderController {
 	    message.setText("Your order will be sent soon!");
 	    // sending message
 	    mailSender.send(message);
-		return info;
+		return "redirect:../shop";
 	}
 	
 }

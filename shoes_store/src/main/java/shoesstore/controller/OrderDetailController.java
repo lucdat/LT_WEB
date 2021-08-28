@@ -54,6 +54,7 @@ public class OrderDetailController {
 		for(OrderDetails detail : orders.getOrderDetails()) {
 			detailService.delete(detail);
 		}
+		orders.getUser().getOrders().remove(orders);
 		orderService.delete(orders);
 		return "delete susscess!";
 	}

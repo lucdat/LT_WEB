@@ -30,10 +30,6 @@
 								class="">Quản lí role</a></li>
 						</ul>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="<%=request.getContextPath() %>/action/list"
-								class="">Quản lí action</a></li>
-						</ul>
-						<ul class="pcoded-submenu">
 							<li class=""><a href="<%=request.getContextPath() %>/category/"
 								class="">Quản lí category</a></li>
 						</ul>
@@ -48,10 +44,6 @@
 						<ul class="pcoded-submenu">
 							<li class=""><a href="<%=request.getContextPath() %>/order/list"
 								class="">Quản lí order</a></li>
-						</ul>
-						<ul class="pcoded-submenu">
-							<li class=""><a href="<%=request.getContextPath() %>//user/list"
-								class="">Quản lí orderDetails</a></li>
 						</ul>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="<%=request.getContextPath() %>/statistical_cost"

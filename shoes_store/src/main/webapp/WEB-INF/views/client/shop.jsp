@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<div id="message" data-message="${message}"></div>
  <!-- Modal -->
     <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -246,6 +247,11 @@
     </section>
     <!--End Brands-->
 <script type="text/javascript">
+if($("#message").attr("data-message") != ""){
+	alert($("#message").attr("data-message"));
+	sessionStorage.clear();
+	$("#message").attr("data-message","")
+}
 $(document).ready(function(){
 	 $(".add-to-card").click(function(){
 		 var id = $(this).closest("div").attr("data-id"); 
@@ -267,5 +273,6 @@ $(document).ready(function(){
 		 var url = "/shoes_store/detail/"+id;
 		 top.location.href=url;
 	 });
+	 
 });
 </script>

@@ -13,22 +13,22 @@
             <div class="col-lg-12 col-sm-12 col-12">
               <div class="form-group">
                 <form:label path="name" cssClass="text-inverse">Name</form:label>
-                <form:input path="name" cssClass="form-control"  placeholder="Name" />
+                <form:input path="name" cssClass="form-control"  placeholder="${user.name}"  required="required"/>
                 <form:errors path="name" cssStyle="color: red;"/>
               </div>  
                <div class="form-group">
                 <form:label path="email" cssClass="text-inverse">Email</form:label>
-                <form:input path="email" type="email" cssClass="form-control"  placeholder="Email" />
+                <form:input path="email" type="email" cssClass="form-control"  placeholder="${user.email}"  required="required" />
                 <form:errors path="email" cssStyle="color: red;"/>
               </div>  
                <div class="form-group">
                 <form:label path="phone" cssClass="text-inverse">Phone</form:label>
-                <form:input path="phone" cssClass="form-control"  placeholder="Phone" />
+                <form:input path="phone" cssClass="form-control"  placeholder="${user.phone}"  required="required"/>
                 <form:errors path="phone" cssStyle="color: red;"/>
               </div>  
                <div class="form-group">
                 <label>Address</label>
-                <input type="text" name="address" class="form-control" placeholder="Address">
+                <input type="text" name="address" class="form-control" placeholder="Address" required="required">
               </div>  
             </div>
           </div>

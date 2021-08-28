@@ -23,18 +23,15 @@ public class Role {
 	
 	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
 	private Set<User> users =new HashSet<User>();
-	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
-	private Set<Action> actions = new HashSet<Action>();
 	
 	public Role() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Role(String name, String description, Set<User> users, Set<Action> actions) {
+	public Role(String name, String description, Set<User> users) {
 		this.name = name;
 		this.description = description;
 		this.users = users;
-		this.actions = actions;
 	}
 
 	public Integer getId() {
@@ -69,13 +66,4 @@ public class Role {
 		this.users = users;
 	}
 
-	public Set<Action> getActions() {
-		return actions;
-	}
-
-	public void setActions(Set<Action> actions) {
-		this.actions = actions;
-	}
-	
-	
 }

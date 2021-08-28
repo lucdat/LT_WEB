@@ -36,7 +36,7 @@
 								<td>${order.address}</td>
 								<c:choose>
          							<c:when test = "${order.status==0}">
-         								<td data-id="${order.id}"><button type="button" class="status btn btn-danger">Pendding</button> </td>
+         								<td data-id="${order.id}"><button type="button" class="status-pendding btn btn-danger">Pendding</button> </td>
          							</c:when>
          							<c:when test = "${order.status==1}">
          								<td><button type="button" class="btn btn-success">Success</button></td>
@@ -99,7 +99,7 @@
  <script src="<c:url value="resources/assets/js/slick.min.js" />" ></script>
  <script type="text/javascript">
 $(document).ready(function(){
-	 $(".status").click(function(){
+	 $(".status-pendding").click(function(){
 		 var id = $(this).closest("td").attr("data-id"); 
 		 var url = "/shoes_store/order/status/"+id;
 		 $.ajax({
@@ -108,6 +108,7 @@ $(document).ready(function(){
 				success: function( response ){
 				}
 		});
+		 $(this).html("<button type="button" class="btn btn-success">Success</button>");
 	 });	 
 	 $(".delete").click(function(){
 		 var id = $(this).closest("td").attr("data-id"); 

@@ -34,8 +34,11 @@ public class Orders {
 	public Orders() {
 		// TODO Auto-generated constructor stub
 	}
-
-
+	public Orders(Double sumPrice, int status, String address) {
+		this.sumPrice = sumPrice;
+		this.status = status;
+		this.address = address;
+	}
 	public Orders(Double sumPrice, int status, String address, Set<OrderDetails> orderDetails, User user) {
 		this.sumPrice = sumPrice;
 		this.status = status;
