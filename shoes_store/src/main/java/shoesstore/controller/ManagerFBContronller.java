@@ -3,6 +3,8 @@ package shoesstore.controller;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import shoesstore.dao.ManagerFeedBackDao;
 import shoesstore.dao.ProductDao;
 import shoesstore.entities.FeedBack;
 import shoesstore.entities.Product;
+import shoesstore.entities.User;
 
 @Controller
 public class ManagerFBContronller {
@@ -36,7 +39,8 @@ public class ManagerFBContronller {
 	
 //	delete 
 	@RequestMapping("manager-feeback/delete/{id}")
-	public String delete(@PathVariable("id") int id , Model model) {
+	public String delete(@PathVariable("id") int id , Model model ) {
+		
 		FeedBack feedBack = managerFeedBackDao.findById(FeedBack.class, id);
 		int idP = feedBack.getProduct().getId();
 		managerFeedBackDao.delete(feedBack);

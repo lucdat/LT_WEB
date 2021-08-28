@@ -2,6 +2,9 @@ package shoesstore.controller;
 
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.velocity.runtime.directive.Foreach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,8 @@ import shoesstore.dao.ProductDao;
 import shoesstore.dao.UserDao;
 import shoesstore.entities.FeedBack;
 import shoesstore.entities.Import;
+import shoesstore.entities.OrderDetails;
+import shoesstore.entities.Orders;
 import shoesstore.entities.Product;
 import shoesstore.entities.User;
 
@@ -48,21 +53,42 @@ public class DetailController {
 	}
 	
 	@PostMapping("post/{id}")
-	public String addFeedback(@RequestParam("content") String content ,@PathVariable("id") int id , Model model ) {
-		 Date date = new Date();  
-		try {
-			User user = userDao.findById(User.class, 7);
-			Product product = productDao.findById(Product.class, id);
-			FeedBack feedBack = new FeedBack();
-			feedBack.setContent(content);
-			feedBack.setDate(date);
-			feedBack.setUser(user);
-			feedBack.setProduct(product);
-			feedBackDao.insert(feedBack);
-		} catch (Exception e) {
-			System.out.println("loi roi ");
-			model.addAttribute("ERROR", 1);
+	public String addFeedback(@RequestParam("content") String content ,@PathVariable("id") int id , Model model , HttpSession session ) {
+		User user1=  (User) session.getAttribute("customerC");
+		if(user1 != null) {
+			try {
+				User user = userDao.findById(User.class, user1.getId());
+				Product product = productDao.findById(Product.class, id);
+				//lay ve list order cua customer
+				Set<Orders> orders = user.getOrders();
+				if(orders.size() >0) {
+					for(Orders orders2 : orders) {
+						Set<OrderDetails> details = orders2.getOrderDetails();
+						if (details.size() >0) {
+							for (OrderDetails orders3 : details) {
+								Product product1 = orders3.getProduct();
+								if(product1.getId() == product.getId()) {
+									Date date = new Date();
+									FeedBack feedBack = new FeedBack();
+									feedBack.setContent(content);
+									feedBack.setDate(date);
+									feedBack.setUser(user);
+									feedBack.setProduct(product);
+									feedBackDao.insert(feedBack);
+									break;
+								}
+							}
+						}
+					}
+					
+				}
+				
+			} catch (Exception e) {
+				model.addAttribute("erorr", 2);
+			}
 		}
+		   
+
 		return "redirect:../../detail/"+id;
 	}
 }

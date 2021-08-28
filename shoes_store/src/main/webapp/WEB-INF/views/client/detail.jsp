@@ -100,6 +100,11 @@
     <!-- Close Content -->
 
 	<div class="container">
+
+     <div class="alert alert-warning alert-dismissible fade show justify-content-center d-flex"  style="margin-left:13%">
+	    <button type="button" class="close" data-dismiss="alert">&times;</button>
+	    <strong>Warning!</strong> LOG IN AND BUY THIS PRODUCT TO ADD NEW FEEDBACK
+  	</div>
         <div class="detailBox justify-content-center">
             <div class="commentBox text-center">
                 

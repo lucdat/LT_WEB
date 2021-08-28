@@ -66,6 +66,10 @@
             ]
         });
     </script>
+
+	<script
+		src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
+
     <!-- End Script -->
 </body>
 
