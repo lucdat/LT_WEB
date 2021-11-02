@@ -16,13 +16,13 @@ public class Import {
 	@Column(nullable = false)
 	private Double price;
 	@Column(nullable = false)
-	private int size;
+	private Integer size;
 	@Column(nullable = false,length = 30)
 	private String color;
 	@Column(nullable = false)
 	private int type;
 	@Column(nullable = false)
-	private int quantity;
+	private Integer quantity;
 
 	@ManyToOne
 	@JoinColumn(name = "product_id",referencedColumnName = "id",nullable = true)
@@ -33,7 +33,7 @@ public class Import {
 	public Import() {
 		// TODO Auto-generated constructor stub
 	}
-	public Import(Double price, int size, String color, int type, int quantity, Product product, Invoice invoice) {
+	public Import(Double price, Integer size, String color, int type, Integer quantity, Product product, Invoice invoice) {
 		this.price = price;
 		this.size = size;
 		this.color = color;
@@ -48,10 +48,10 @@ public class Import {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 	public Product getProduct() {
@@ -80,10 +80,10 @@ public class Import {
 	public void setType(int type) {
 		this.type = type;
 	}
-	public int getSize() {
+	public Integer getSize() {
 		return size;
 	}
-	public void setSize(int size) {
+	public void setSize(Integer size) {
 		this.size = size;
 	}
 	public String getColor() {

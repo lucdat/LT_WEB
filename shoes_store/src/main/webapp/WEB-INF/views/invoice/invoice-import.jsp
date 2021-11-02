@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <div class="container">
@@ -80,8 +80,8 @@
                 <button class="btn btn-info" type="submit">Add</button>
                 <a href="<c:url value="/invoice/list/1" />" class="btn btn-success" role="button">Back</a>
             </div>
-            
-          </div>  
+          </div>
+          
        </form:form> 
       </div>
     <div class="row">
@@ -117,7 +117,7 @@
 		            	<a href="<c:url value="/invoice/editimportdown/${im.id }" />" class="btn btn-success" role="button">-</a>
 		            	
 		            </td>
-		            <td>${im.price}</td>
+		            <td><f:formatNumber value="${im.price}" type="currency"/></td>
 		            <td class="text-center">
 		                <a href="<c:url value="/invoice/deleteimport/${im.id }" />" class="btn btn-danger" role="button"><i class="far fa-trash-alt"></i></a>
 		          

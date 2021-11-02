@@ -2,6 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>  
+
 <div class="container">
 <div class="row">
 	<a href="<c:url value="/invoice/add" />" class="btn btn-info mx-auto" role="button">Add New invoice</a>
@@ -26,7 +28,7 @@
 		            <td>${invoice.description}</td>
 		            <td>${invoice.date}</td>
 		            <td>${invoice.quantity}</td>
-		            <td>${invoice.price}</td>
+		            <td><f:formatNumber value="${invoice.price}" type="currency"/></td>
 		            <td class="text-center">
 		            	<a href="<c:url value="/invoice/import/${invoice.id }" />" class="btn btn-primary" role="button">+</a>
 		            	<a href="<c:url value="/invoice/delete/${invoice.id }" />" class="btn btn-danger" role="button"><i class="far fa-trash-alt"></i></a>

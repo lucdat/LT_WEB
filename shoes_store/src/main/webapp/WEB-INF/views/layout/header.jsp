@@ -25,16 +25,11 @@
 							<div class="pro-head">
 								<img src="data:image/jpeg;base64,${sessionScope.usernameAdmin.image}" class="img-radius" alt="User-Profile-Image">
 								<span>${sessionScope.usernameAdmin.name }</span>
-								<a href="<c:url value="/logoutadmin" />" class="dud-logout" title="Logout"/>
+								<a href="<c:url value="/logoutadmin" />" class="dud-logout">
 									<i class="feather icon-log-out"></i>
 								</a>
 							</div>
-							<ul class="pro-body">
-								<li><a href="#!" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
-								<li><a href="#!" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-								<li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
-								<li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
-							</ul>
+							
 						</div>
 					</div>
 				</li>

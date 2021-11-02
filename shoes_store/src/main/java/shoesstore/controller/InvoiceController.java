@@ -76,38 +76,66 @@ public class InvoiceController {
         
 	}
 	@GetMapping("import/{id}")
-	public String showImportProduct(@PathVariable("id") int id, Model model) {
-		model.addAttribute("url", "../import/" + id);
-		model.addAttribute("import", new Import());
-		List<Import> imports = importDao.findByProperty("invoice.id", id);
-		model.addAttribute("listImport",imports);
-		return "invoice-import";
+	public String showImportProduct(@PathVariable("id") int id, Model model, HttpSession session) {
+		while(session.getAttribute("usernameAdmin") != null) {
+			model.addAttribute("url", "../import/" + id);
+			model.addAttribute("import", new Import());
+			List<Import> imports = importDao.findByProperty("invoice.id", id);
+			model.addAttribute("listImport",imports);
+			return "invoice-import";
+		}
+		return "redirect:/loginadmin";
+
+		
 	}
 	@PostMapping("import/{id}")
 	public String importProduct(@PathVariable("id") int id,@ModelAttribute("import") Import ip ,Model model) {
-		List<Product> pd = productDao.findByProperty("code", ip.getProduct().getCode());
-		Invoice iv = invoiceDao.findById(Invoice.class, id);
-		ip.setInvoice(iv);
-		ip.setType(1);
-		if(pd.size() == 1) {
-			pd.get(0).setQuantity(pd.get(0).getQuantity() + ip.getQuantity());
-			productDao.update(pd.get(0));
-			ip.setProduct(pd.get(0));
-		}
-		else {
-			Product product = new Product();
-			product.setCode(ip.getProduct().getCode());
-			product.setName(ip.getProduct().getName());
-			product.setQuantity(ip.getQuantity());
-			productDao.insert(product);
-			ip.setProduct(productDao.findByProperty("code", ip.getProduct().getCode()).get(0));
+		if(ip.getProduct().getCode().equals("")) {
+			model.addAttribute("message", "CODE is wrong!");
+			return "redirect:../import/" + id;
+		}else if (ip.getProduct().getName().equals("")) {
+			model.addAttribute("message", "Name is wrong!");
+			return "redirect:../import/" + id;
+		}else if (ip.getColor().equals("")) {
+			model.addAttribute("message", "Color is wrong!");
+			return "redirect:../import/" + id;
+		}else if (ip.getSize() < 1 || ip.getSize() == null) {
+			model.addAttribute("message", "Size is wrong!");
+			return "redirect:../import/" + id;
+		}else if (ip.getQuantity() < 1 || ip.getQuantity() == null) {
+			model.addAttribute("message", "Quantity is wrong!");
+			return "redirect:../import/" + id;
+		}else if (ip.getPrice() < 1 || ip.getPrice() == null) {
+			model.addAttribute("message", "Price is wrong!");
+			return "redirect:../import/" + id;
+		}else {
+			List<Product> pd = productDao.findByProperty("code", ip.getProduct().getCode());
+			Invoice iv = invoiceDao.findById(Invoice.class, id);
+			ip.setInvoice(iv);
+			ip.setType(1);
+			if(pd.size() == 1) {
+				pd.get(0).setQuantity(pd.get(0).getQuantity() + ip.getQuantity());
+				pd.get(0).setName(ip.getProduct().getName());
+				productDao.update(pd.get(0));
+				ip.setProduct(pd.get(0));
+			}
+			else {
+				Product product = new Product();
+				product.setCode(ip.getProduct().getCode());
+				product.setName(ip.getProduct().getName());
+				product.setPrice(ip.getPrice());
+				product.setQuantity(ip.getQuantity());
+				productDao.insert(product);
+				ip.setProduct(productDao.findByProperty("code", ip.getProduct().getCode()).get(0));
+			}
+			
+			iv.setQuantity(iv.getQuantity() + ip.getQuantity());
+			iv.setPrice(iv.getPrice() + ip.getQuantity()*ip.getPrice());
+			invoiceDao.update(iv);
+			importDao.insert(ip);
+			return "redirect:../import/" + id;
 		}
 		
-		iv.setQuantity(iv.getQuantity() + ip.getQuantity());
-		iv.setPrice(iv.getPrice() + ip.getQuantity()*ip.getPrice());
-		invoiceDao.update(iv);
-		importDao.insert(ip);
-		return "redirect:../list/1";
 	}	
 	
 	
