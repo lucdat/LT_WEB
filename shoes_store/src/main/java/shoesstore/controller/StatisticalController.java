@@ -1,8 +1,10 @@
 package shoesstore.controller;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,12 +35,17 @@ public class StatisticalController {
         String endDate = formatter.format(end);
         
         List<Invoice> l = invoiceDao.statistical(strDate, endDate);
-        double sum = 0;
+        float sum = 0;
         for (Invoice invoice : l) {
 			sum += invoice.getPrice();
 		}
         model.addAttribute("list_invoice", l);
-        model.addAttribute("sum", sum);
+        model.addAttribute("sum", formatDecimal(sum));
 		return "statistical_end";
+	}
+	public String formatDecimal(float f) {
+        Locale locale = new Locale("vi");
+        NumberFormat format =  NumberFormat.getCurrencyInstance(locale);
+        return format.format(f) + "VNĐ";
 	}
 }
